@@ -14,7 +14,7 @@ export async function startCheckoutSession(designSlug: string, variantId: string
   const siteUrl = getSiteUrl();
 
   const session = await stripe.checkout.sessions.create({
-    ui_mode: "embedded",
+    ui_mode: "embedded_page",
     redirect_on_completion: "always",
     return_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
     mode: "payment",
