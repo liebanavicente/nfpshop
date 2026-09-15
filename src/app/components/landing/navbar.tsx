@@ -2,15 +2,40 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useLocale, locales } from "@/lib/i18n";
 
-const links = [
-  { href: "/#colecciones", label: "Colecciones" },
-  { href: "/#productos", label: "Productos" },
-  { href: "/#envio", label: "Envío y devoluciones" },
-];
+function LanguageSwitcher() {
+  const { locale, setLocale } = useLocale();
+  return (
+    <div className="flex items-center gap-1 border border-white/20 text-xs">
+      {locales.map(({ id, label }) => (
+        <button
+          key={id}
+          type="button"
+          onClick={() => setLocale(id)}
+          aria-pressed={locale === id}
+          className={`px-2 py-1 transition-colors ${
+            locale === id
+              ? "bg-white text-black"
+              : "text-neutral-300 hover:text-white"
+          }`}
+        >
+          {label}
+        </button>
+      ))}
+    </div>
+  );
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { t } = useLocale();
+
+  const links = [
+    { href: "/#colecciones", label: t("nav.colecciones") },
+    { href: "/#productos", label: t("nav.productos") },
+    { href: "/#envio", label: t("nav.envio") },
+  ];
 
   return (
     <header className="fixed top-0 z-50 w-full border-b border-white/10 bg-black/40 backdrop-blur-md">
@@ -31,11 +56,14 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="flex items-center gap-3">
+          <div className="hidden sm:block">
+            <LanguageSwitcher />
+          </div>
           <Link
             href="/tienda"
             className="rounded-none border border-sky-300/70 px-4 py-2 text-xs font-semibold tracking-widest text-sky-200 transition-colors hover:bg-sky-300/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
           >
-            ENTRAR
+            {t("nav.entrar").toUpperCase()}
           </Link>
           <button
             type="button"
@@ -73,6 +101,9 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li className="pt-2">
+            <LanguageSwitcher />
+          </li>
         </ul>
       </div>
     </header>

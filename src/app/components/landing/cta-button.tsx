@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useLocale } from "@/lib/i18n";
 
 const sparks = [
   { x: 30, y: -22 },
@@ -10,12 +13,13 @@ const sparks = [
 ];
 
 export default function CtaButton() {
+  const { t } = useLocale();
   return (
     <Link
       href="/tienda"
       className="cta group relative mt-8 inline-flex items-center gap-3 border-2 border-white px-8 py-4 font-[family-name:var(--font-display)] text-xl uppercase tracking-widest text-white transition-colors duration-200 hover:bg-white hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300"
     >
-      <span className="relative z-10">Entrar</span>
+      <span className="relative z-10">{t("hero.cta")}</span>
       <span aria-hidden="true" className="relative z-10 transition-transform duration-200 group-hover:translate-x-1">
         →
       </span>

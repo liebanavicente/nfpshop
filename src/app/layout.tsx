@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Special_Elite } from "next/font/google";
 import Navbar from "@/app/components/landing/navbar";
 import Footer from "@/app/components/landing/footer";
+import { LocaleProvider } from "@/lib/i18n";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -27,9 +28,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${specialElite.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white">
-        <Navbar />
-        {children}
-        <Footer />
+        <LocaleProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </LocaleProvider>
       </body>
     </html>
   );

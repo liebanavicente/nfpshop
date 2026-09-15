@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { designs } from "@/lib/products";
 import ProductImage from "@/app/components/product-image";
+import { useLocale } from "@/lib/i18n";
 
 function formatPrice(cents: number, currency: string) {
   return new Intl.NumberFormat("es-ES", {
@@ -18,6 +21,7 @@ function Section({
   title: string;
   category: "camiseta" | "funda-iphone";
 }) {
+  const { t } = useLocale();
   const items = designs.filter((d) => d.category === category);
   return (
     <section id={id} className="mb-16 scroll-mt-24">
@@ -38,7 +42,7 @@ function Section({
                 <h3 className="font-semibold text-white">{design.name}</h3>
                 <p className="mt-1 text-sm text-neutral-400">{design.description}</p>
                 <p className="mt-3 font-medium text-sky-300">
-                  Desde {formatPrice(fromPrice.priceCents, fromPrice.currency)}
+                  {t("tienda.desde")} {formatPrice(fromPrice.priceCents, fromPrice.currency)}
                 </p>
               </div>
             </Link>
@@ -50,16 +54,15 @@ function Section({
 }
 
 export default function Tienda() {
+  const { t } = useLocale();
   return (
     <main className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-6">
       <h1 className="mb-2 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white">
-        Nuestra tienda
+        {t("tienda.heading")}
       </h1>
-      <p className="mb-12 text-neutral-400">
-        Productos personalizados, impresos y enviados bajo demanda.
-      </p>
-      <Section id="camisetas" title="Camisetas" category="camiseta" />
-      <Section id="fundas" title="Fundas de iPhone" category="funda-iphone" />
+      <p className="mb-12 text-neutral-400">{t("tienda.subheading")}</p>
+      <Section id="camisetas" title={t("tienda.camisetas")} category="camiseta" />
+      <Section id="fundas" title={t("tienda.fundas")} category="funda-iphone" />
     </main>
   );
 }

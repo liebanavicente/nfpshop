@@ -1,27 +1,32 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-
-const collections = [
-  {
-    href: "/tienda#camisetas",
-    label: "Camisetas",
-    image: "/products/dolphinflag.png",
-    bg: "bg-neutral-900",
-  },
-  {
-    href: "/tienda#fundas",
-    label: "Fundas de iPhone",
-    image: "/products/case-guitarra.jpg",
-    bg: "bg-neutral-950",
-  },
-];
+import { useLocale } from "@/lib/i18n";
 
 export default function Collections() {
+  const { t } = useLocale();
+
+  const collections = [
+    {
+      href: "/tienda#camisetas",
+      label: t("collections.camisetas"),
+      image: "/products/dolphinflag.png",
+      bg: "bg-neutral-900",
+    },
+    {
+      href: "/tienda#fundas",
+      label: t("collections.fundas"),
+      image: "/products/case-guitarra.jpg",
+      bg: "bg-neutral-950",
+    },
+  ];
+
   return (
     <section id="colecciones" className="scroll-mt-16 bg-black px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h2 className="reveal-on-scroll mb-10 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white sm:text-4xl">
-          Colecciones
+          {t("collections.heading")}
         </h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {collections.map((c) => (

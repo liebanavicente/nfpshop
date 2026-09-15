@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import { designs } from "@/lib/products";
 import ProductImage from "@/app/components/product-image";
+import { useLocale } from "@/lib/i18n";
 
 function formatPrice(cents: number, currency: string) {
   return new Intl.NumberFormat("es-ES", { style: "currency", currency }).format(
@@ -9,12 +12,13 @@ function formatPrice(cents: number, currency: string) {
 }
 
 export default function ProductsPreview() {
+  const { t } = useLocale();
   const featured = designs.slice(0, 4);
   return (
     <section id="productos" className="scroll-mt-16 bg-neutral-950 px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h2 className="reveal-on-scroll mb-10 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white sm:text-4xl">
-          Productos
+          {t("products.heading")}
         </h2>
         <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-4">
           {featured.map((design) => {
@@ -41,7 +45,7 @@ export default function ProductsPreview() {
             href="/tienda"
             className="nav-link font-[family-name:var(--font-display)] text-lg uppercase tracking-widest text-white"
           >
-            Ver todo →
+            {t("products.verTodo")} →
           </Link>
         </div>
       </div>

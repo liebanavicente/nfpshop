@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Checkout from "@/app/components/checkout";
 import ProductImage from "@/app/components/product-image";
+import { useLocale } from "@/lib/i18n";
 import type { Design } from "@/lib/products";
 
 function formatPrice(cents: number, currency: string) {
@@ -12,6 +13,7 @@ function formatPrice(cents: number, currency: string) {
 }
 
 export default function VariantPicker({ design }: { design: Design }) {
+  const { t } = useLocale();
   const [variantId, setVariantId] = useState(design.variants[0].id);
   const variant = design.variants.find((v) => v.id === variantId)!;
 
@@ -30,7 +32,7 @@ export default function VariantPicker({ design }: { design: Design }) {
       </p>
 
       <label className="mb-2 mt-6 block text-sm font-medium text-neutral-300">
-        {design.category === "camiseta" ? "Color y talla" : "Modelo"}
+        {design.category === "camiseta" ? t("product.colorTalla") : t("product.modelo")}
       </label>
       <select
         className="w-full rounded-md border border-white/20 bg-neutral-900 px-3 py-2 text-white"

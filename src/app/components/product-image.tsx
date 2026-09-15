@@ -9,8 +9,18 @@ export default function ProductImage({
   design: Design;
   variant: Variant;
 }) {
+  // Tee artwork is a transparent PNG (ink only) — the swatch behind it must
+  // match the garment color or dark-ink art disappears on a dark card and
+  // light-ink art disappears on a light one.
+  const swatchBg =
+    design.category === "camiseta"
+      ? variant.id.startsWith("black")
+        ? "bg-neutral-950"
+        : "bg-neutral-100"
+      : "bg-neutral-900";
+
   return (
-    <div className="group relative aspect-square overflow-hidden bg-neutral-900">
+    <div className={`group relative aspect-square overflow-hidden ${swatchBg}`}>
       <Image
         src={variant.imageUrl}
         alt={design.name}
