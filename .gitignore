@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# diseños originales y procesado local (los finales viven en public/products)
+/diseños
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

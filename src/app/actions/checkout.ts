@@ -1,13 +1,14 @@
 "use server";
 
 import { stripe } from "@/lib/stripe";
-import { getProduct } from "@/lib/products";
+import { getDesign, getVariant } from "@/lib/products";
 import { getSiteUrl } from "@/lib/site-url";
 
-export async function startCheckoutSession(productId: string) {
-  const product = getProduct(productId);
-  if (!product) {
-    throw new Error(`Unknown product: ${productId}`);
+export async function startCheckoutSession(designSlug: string, variantId: string) {
+  const design = getDesign(designSlug);
+  const variant = design && getVariant(design, variantId);
+  if (!design || !variant) {
+    throw new Error(`Unknown design/variant: ${designSlug}/${variantId}`);
   }
 
   const siteUrl = getSiteUrl();
@@ -25,20 +26,20 @@ export async function startCheckoutSession(productId: string) {
     line_items: [
       {
         price_data: {
-          currency: product.currency,
+          currency: variant.currency,
           product_data: {
-            name: product.name,
-            description: product.description,
-            images: [`${siteUrl}${product.imageUrl}`],
-            metadata: { productId: product.id },
+            name: `${design.name} (${variant.label})`,
+            description: design.description,
+            images: [`${siteUrl}${variant.imageUrl}`],
           },
-          unit_amount: product.priceCents,
+          unit_amount: variant.priceCents,
         },
         quantity: 1,
       },
     ],
     metadata: {
-      productId: product.id,
+      designSlug: design.slug,
+      variantId: variant.id,
     },
   });
 

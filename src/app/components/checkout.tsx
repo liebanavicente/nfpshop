@@ -12,10 +12,16 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 
-export default function Checkout({ productId }: { productId: string }) {
+export default function Checkout({
+  designSlug,
+  variantId,
+}: {
+  designSlug: string;
+  variantId: string;
+}) {
   const fetchClientSecret = useCallback(
-    () => startCheckoutSession(productId),
-    [productId],
+    () => startCheckoutSession(designSlug, variantId),
+    [designSlug, variantId],
   );
 
   return (

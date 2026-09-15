@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-import { getProduct } from "@/lib/products";
+import { getDesign, getVariant } from "@/lib/products";
 import { createGelatoOrder } from "@/lib/gelato";
+import { getSiteUrl } from "@/lib/site-url";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -40,15 +41,18 @@ async function handleCompletedCheckout(sessionId: string) {
     expand: ["line_items"],
   });
 
-  const productId = session.metadata?.productId;
-  const product = productId ? getProduct(productId) : undefined;
+  const designSlug = session.metadata?.designSlug;
+  const variantId = session.metadata?.variantId;
+  const design = designSlug ? getDesign(designSlug) : undefined;
+  const variant = design && variantId ? getVariant(design, variantId) : undefined;
   const shipping = session.collected_information?.shipping_details;
   const address = shipping?.address ?? session.customer_details?.address;
 
-  if (!product || !address || !session.customer_details?.email) {
+  if (!design || !variant || !address || !session.customer_details?.email) {
     console.error("Checkout completed with missing data", {
       sessionId,
-      productId,
+      designSlug,
+      variantId,
     });
     return;
   }
@@ -59,12 +63,13 @@ async function handleCompletedCheckout(sessionId: string) {
     await createGelatoOrder({
       orderReferenceId: session.id,
       customerReferenceId: session.customer_details.email,
-      currency: (session.currency ?? product.currency).toUpperCase(),
+      currency: (session.currency ?? variant.currency).toUpperCase(),
       items: [
         {
-          itemReferenceId: product.id,
-          productUid: product.gelatoProductUid,
+          itemReferenceId: `${design.slug}-${variant.id}`,
+          productUid: variant.gelatoProductUid,
           quantity: 1,
+          files: [{ type: "default", url: `${getSiteUrl()}${variant.imageUrl}` }],
         },
       ],
       shippingAddress: {
