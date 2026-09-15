@@ -3,6 +3,7 @@ import { Geist, Special_Elite } from "next/font/google";
 import Navbar from "@/app/components/landing/navbar";
 import Footer from "@/app/components/landing/footer";
 import { LocaleProvider } from "@/lib/i18n";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,6 +18,7 @@ const specialElite = Special_Elite({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(getSiteUrl()),
   title: "No Flag Patriots — Merch",
   description: "Productos personalizados impresos y enviados bajo demanda.",
 };
