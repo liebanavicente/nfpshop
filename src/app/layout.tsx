@@ -20,7 +20,7 @@ const specialElite = Special_Elite({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: "No Flag Patriots — Merch",
-  description: "Productos personalizados impresos y enviados bajo demanda.",
+  description: "Merchandising de nuestra banda, NFP.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
