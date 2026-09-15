@@ -66,9 +66,9 @@ function caseVariants(imageUrl: string): Variant[] {
 
 export const designs: Design[] = [
   {
-    slug: "ballena-bandera",
-    name: "Ballena y bandera",
-    description: "Diseño ilustrado de ballena con bandera, estampado frontal.",
+    slug: "delfin-bandera",
+    name: "Delfín y bandera",
+    description: "Diseño ilustrado de delfín con bandera, estampado frontal. Dolphins and Earthquakes.",
     category: "camiseta",
     variants: teeVariants({
       white: "/products/dolphinflag.png",
@@ -76,9 +76,9 @@ export const designs: Design[] = [
     }),
   },
   {
-    slug: "tiburon-guitarra",
-    name: "Tiburón guitarrista",
-    description: "Tiburón tocando la guitarra, estampado frontal.",
+    slug: "delfin-guitarra",
+    name: "Delfín guitarrista",
+    description: "Delfín tocando la guitarra, estampado frontal. Dolphins and Earthquakes.",
     category: "camiseta",
     variants: teeVariants({
       white: "/products/dolphinpizza.png",
@@ -86,9 +86,9 @@ export const designs: Design[] = [
     }),
   },
   {
-    slug: "tiburon-skate",
-    name: "Tiburón skater",
-    description: "Tiburón sobre un skate, estampado frontal.",
+    slug: "delfin-skate",
+    name: "Delfín skater",
+    description: "Delfín sobre un skate, estampado frontal. Dolphins and Earthquakes.",
     category: "camiseta",
     variants: teeVariants({
       white: "/products/dolphinskate.png",
@@ -116,23 +116,23 @@ export const designs: Design[] = [
     }),
   },
   {
-    slug: "funda-ballena-bandera",
-    name: "Funda — Ballena y bandera",
-    description: "Funda de iPhone con estampado a sangre completa.",
+    slug: "funda-delfin-bandera",
+    name: "Funda — Delfín y bandera",
+    description: "Funda de iPhone con estampado a sangre completa. Dolphins and Earthquakes.",
     category: "funda-iphone",
-    variants: caseVariants("/products/case-ballena.jpg"),
+    variants: caseVariants("/products/case-delfin-bandera.jpg"),
   },
   {
-    slug: "funda-tiburon-guitarra",
-    name: "Funda — Tiburón guitarrista",
-    description: "Funda de iPhone con estampado a sangre completa.",
+    slug: "funda-delfin-guitarra",
+    name: "Funda — Delfín guitarrista",
+    description: "Funda de iPhone con estampado a sangre completa. Dolphins and Earthquakes.",
     category: "funda-iphone",
     variants: caseVariants("/products/case-guitarra.jpg"),
   },
   {
-    slug: "funda-tiburon-skate",
-    name: "Funda — Tiburón skater",
-    description: "Funda de iPhone con estampado a sangre completa.",
+    slug: "funda-delfin-skate",
+    name: "Funda — Delfín skater",
+    description: "Funda de iPhone con estampado a sangre completa. Dolphins and Earthquakes.",
     category: "funda-iphone",
     variants: caseVariants("/products/case-skate.jpg"),
   },

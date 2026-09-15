@@ -1,24 +1,29 @@
+// Hand-jittered points so each arm reads as a rough, broken brush stroke
+// (like the XXX marks in the band's logo) instead of a clean geometric line.
+const ARM_A = "-17,-16 -11,-12 -13,-7 -5,-3 -1,2 6,6 4,11 17,17";
+const ARM_B = "17,-17 10,-13 13,-8 4,-4 1,1 -6,7 -3,12 -17,16";
+
 function XMark({ x, y, size, rotate = 0 }: { x: number; y: number; size: number; rotate?: number }) {
-  const half = size / 2;
+  const scale = size / 34;
   return (
-    <g transform={`translate(${x} ${y}) rotate(${rotate})`}>
-      <line
-        x1={-half}
-        y1={-half}
-        x2={half}
-        y2={half}
+    <g transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scale})`}>
+      <polyline
+        points={ARM_A}
+        fill="none"
         stroke="#e6f4ff"
-        strokeWidth={size * 0.22}
-        strokeLinecap="round"
+        strokeWidth={7.5}
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+        strokeDasharray="9 2.5 6 3 8"
       />
-      <line
-        x1={half}
-        y1={-half}
-        x2={-half}
-        y2={half}
+      <polyline
+        points={ARM_B}
+        fill="none"
         stroke="#bfe0ff"
-        strokeWidth={size * 0.22}
-        strokeLinecap="round"
+        strokeWidth={7.5}
+        strokeLinecap="butt"
+        strokeLinejoin="round"
+        strokeDasharray="7 3 10 2 5"
       />
     </g>
   );
