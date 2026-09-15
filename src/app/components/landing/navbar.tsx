@@ -4,9 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 
 const links = [
-  { href: "#colecciones", label: "Colecciones" },
-  { href: "#productos", label: "Productos" },
-  { href: "#envio", label: "Envío y devoluciones" },
+  { href: "/#colecciones", label: "Colecciones" },
+  { href: "/#productos", label: "Productos" },
+  { href: "/#envio", label: "Envío y devoluciones" },
 ];
 
 export default function Navbar() {

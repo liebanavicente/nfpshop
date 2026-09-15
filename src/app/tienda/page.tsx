@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { designs } from "@/lib/products";
+import ProductImage from "@/app/components/product-image";
 
 function formatPrice(cents: number, currency: string) {
   return new Intl.NumberFormat("es-ES", {
@@ -20,8 +20,10 @@ function Section({
 }) {
   const items = designs.filter((d) => d.category === category);
   return (
-    <section id={id} className="mb-12 scroll-mt-20">
-      <h2 className="text-xl font-semibold mb-6">{title}</h2>
+    <section id={id} className="mb-16 scroll-mt-24">
+      <h2 className="mb-6 font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
+        {title}
+      </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {items.map((design) => {
           const fromPrice = design.variants[0];
@@ -29,20 +31,13 @@ function Section({
             <Link
               key={design.slug}
               href={`/producto/${design.slug}`}
-              className="group border border-neutral-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+              className="overflow-hidden border border-white/10 bg-neutral-950 transition-colors hover:border-sky-300/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
             >
-              <div className="relative aspect-square bg-neutral-100">
-                <Image
-                  src={fromPrice.imageUrl}
-                  alt={design.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
+              <ProductImage design={design} variant={fromPrice} />
               <div className="p-4">
-                <h3 className="font-semibold">{design.name}</h3>
-                <p className="text-sm text-neutral-600 mt-1">{design.description}</p>
-                <p className="mt-3 font-medium">
+                <h3 className="font-semibold text-white">{design.name}</h3>
+                <p className="mt-1 text-sm text-neutral-400">{design.description}</p>
+                <p className="mt-3 font-medium text-sky-300">
                   Desde {formatPrice(fromPrice.priceCents, fromPrice.currency)}
                 </p>
               </div>
@@ -56,9 +51,11 @@ function Section({
 
 export default function Tienda() {
   return (
-    <main className="mx-auto max-w-5xl px-4 py-12">
-      <h1 className="text-3xl font-bold mb-2">Nuestra tienda</h1>
-      <p className="text-neutral-600 mb-10">
+    <main className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-6">
+      <h1 className="mb-2 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white">
+        Nuestra tienda
+      </h1>
+      <p className="mb-12 text-neutral-400">
         Productos personalizados, impresos y enviados bajo demanda.
       </p>
       <Section id="camisetas" title="Camisetas" category="camiseta" />

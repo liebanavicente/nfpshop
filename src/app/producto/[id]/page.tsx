@@ -14,7 +14,7 @@ export default async function ProductPage({
   }
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main className="mx-auto max-w-3xl px-4 pb-12 pt-28">
       <VariantPicker design={design} />
     </main>
   );

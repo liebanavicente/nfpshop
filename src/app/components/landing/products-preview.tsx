@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { designs } from "@/lib/products";
+import ProductImage from "@/app/components/product-image";
 
 function formatPrice(cents: number, currency: string) {
   return new Intl.NumberFormat("es-ES", { style: "currency", currency }).format(
@@ -25,14 +25,7 @@ export default function ProductsPreview() {
                 href={`/producto/${design.slug}`}
                 className="reveal-on-scroll group block border border-white/10 bg-black transition-transform duration-200 ease-out hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
               >
-                <div className="relative aspect-square overflow-hidden bg-neutral-900">
-                  <Image
-                    src={variant.imageUrl}
-                    alt={design.name}
-                    fill
-                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
-                  />
-                </div>
+                <ProductImage design={design} variant={variant} />
                 <div className="p-3">
                   <h3 className="truncate text-sm text-white">{design.name}</h3>
                   <p className="mt-1 text-sm font-semibold text-sky-300">
