@@ -7,22 +7,14 @@ import {
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { startCheckoutSession } from "@/app/actions/checkout";
+import type { CartLine } from "@/lib/cart";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
 );
 
-export default function Checkout({
-  designSlug,
-  variantId,
-}: {
-  designSlug: string;
-  variantId: string;
-}) {
-  const fetchClientSecret = useCallback(
-    () => startCheckoutSession(designSlug, variantId),
-    [designSlug, variantId],
-  );
+export default function Checkout({ lines }: { lines: CartLine[] }) {
+  const fetchClientSecret = useCallback(() => startCheckoutSession(lines), [lines]);
 
   return (
     <div id="checkout">

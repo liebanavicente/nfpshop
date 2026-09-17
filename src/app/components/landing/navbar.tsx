@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useLocale, locales } from "@/lib/i18n";
+import { useCart } from "@/lib/cart";
 
 function LanguageSwitcher() {
   const { locale, setLocale } = useLocale();
@@ -24,6 +25,29 @@ function LanguageSwitcher() {
         </button>
       ))}
     </div>
+  );
+}
+
+function CartLink() {
+  const { t } = useLocale();
+  const { totalCount } = useCart();
+  return (
+    <Link
+      href="/carrito"
+      aria-label={t("nav.carrito")}
+      className="relative flex h-9 w-9 items-center justify-center border border-white/20 text-white transition-colors hover:border-sky-300/70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
+    >
+      <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+        <path d="M3 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L20 8H6" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="9.5" cy="20.5" r="1.2" fill="currentColor" stroke="none" />
+        <circle cx="17.5" cy="20.5" r="1.2" fill="currentColor" stroke="none" />
+      </svg>
+      {totalCount > 0 && (
+        <span className="absolute -right-1.5 -top-1.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-sky-300 px-1 text-[10px] font-bold text-black">
+          {totalCount}
+        </span>
+      )}
+    </Link>
   );
 }
 
@@ -59,6 +83,7 @@ export default function Navbar() {
           <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
+          <CartLink />
           <Link
             href="/tienda"
             className="rounded-none border border-sky-300/70 px-4 py-2 text-xs font-semibold tracking-widest text-sky-200 transition-colors hover:bg-sky-300/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"

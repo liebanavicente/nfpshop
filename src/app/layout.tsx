@@ -3,6 +3,7 @@ import { Geist, Special_Elite } from "next/font/google";
 import Navbar from "@/app/components/landing/navbar";
 import Footer from "@/app/components/landing/footer";
 import { LocaleProvider } from "@/lib/i18n";
+import { CartProvider } from "@/lib/cart";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,9 +30,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-black text-white">
         <LocaleProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <CartProvider>
+            <Navbar />
+            {children}
+            <Footer />
+          </CartProvider>
         </LocaleProvider>
       </body>
     </html>

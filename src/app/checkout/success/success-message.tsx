@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
 import { useLocale } from "@/lib/i18n";
+import { useCart } from "@/lib/cart";
 
 export function OrderNotFound() {
   const { t } = useLocale();
@@ -13,6 +15,13 @@ export function OrderNotFound() {
 
 export function OrderSuccess({ email }: { email?: string | null }) {
   const { t } = useLocale();
+  const { clear } = useCart();
+
+  useEffect(() => {
+    clear();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <h1 className="font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">

@@ -19,6 +19,7 @@ const dictionaries: Record<Locale, Dict> = {
       productos: "Productos",
       envio: "Envío y devoluciones",
       entrar: "Entrar",
+      carrito: "Carrito",
     },
     hero: {
       welcomeShort: "MERCH OFICIAL DE",
@@ -60,11 +61,24 @@ const dictionaries: Record<Locale, Dict> = {
     product: {
       colorTalla: "Color y talla",
       modelo: "Modelo",
+      cantidad: "Cantidad",
+      añadirCarrito: "Añadir al carrito",
+      añadido: "Añadido al carrito",
+      verCarrito: "Ver carrito",
     },
     checkoutSuccess: {
       thanks: "¡Gracias por tu compra!",
       body: "Hemos recibido tu pago y estamos preparando tu pedido para producción y envío. Te llegará la confirmación a",
       notFound: "Pedido no encontrado",
+    },
+    cart: {
+      heading: "Tu carrito",
+      empty: "Tu carrito está vacío.",
+      seguirComprando: "Seguir comprando",
+      eliminar: "Eliminar",
+      subtotal: "Subtotal",
+      finalizarCompra: "Finalizar compra",
+      envioNota: "El envío se calcula en un único pedido, aunque compres varios productos.",
     },
   },
   ca: {
@@ -73,6 +87,7 @@ const dictionaries: Record<Locale, Dict> = {
       productos: "Productes",
       envio: "Enviament i devolucions",
       entrar: "Entra",
+      carrito: "Cistella",
     },
     hero: {
       welcomeShort: "MERCH OFICIAL DE",
@@ -114,11 +129,24 @@ const dictionaries: Record<Locale, Dict> = {
     product: {
       colorTalla: "Color i talla",
       modelo: "Model",
+      cantidad: "Quantitat",
+      añadirCarrito: "Afegeix a la cistella",
+      añadido: "Afegit a la cistella",
+      verCarrito: "Veure la cistella",
     },
     checkoutSuccess: {
       thanks: "Gràcies per la teva compra!",
       body: "Hem rebut el teu pagament i estem preparant la teva comanda per a producció i enviament. Rebràs la confirmació a",
       notFound: "Comanda no trobada",
+    },
+    cart: {
+      heading: "La teva cistella",
+      empty: "La teva cistella està buida.",
+      seguirComprando: "Continua comprant",
+      eliminar: "Elimina",
+      subtotal: "Subtotal",
+      finalizarCompra: "Finalitza la compra",
+      envioNota: "L'enviament es calcula en una única comanda, encara que compris diversos productes.",
     },
   },
   en: {
@@ -127,6 +155,7 @@ const dictionaries: Record<Locale, Dict> = {
       productos: "Products",
       envio: "Shipping & returns",
       entrar: "Enter",
+      carrito: "Cart",
     },
     hero: {
       welcomeShort: "OFFICIAL MERCH OF",
@@ -168,11 +197,24 @@ const dictionaries: Record<Locale, Dict> = {
     product: {
       colorTalla: "Color and size",
       modelo: "Model",
+      cantidad: "Quantity",
+      añadirCarrito: "Add to cart",
+      añadido: "Added to cart",
+      verCarrito: "View cart",
     },
     checkoutSuccess: {
       thanks: "Thanks for your order!",
       body: "We've received your payment and we're getting your order ready for production and shipping. Confirmation will be sent to",
       notFound: "Order not found",
+    },
+    cart: {
+      heading: "Your cart",
+      empty: "Your cart is empty.",
+      seguirComprando: "Continue shopping",
+      eliminar: "Remove",
+      subtotal: "Subtotal",
+      finalizarCompra: "Checkout",
+      envioNota: "Shipping is calculated as a single order, even if you buy several products.",
     },
   },
 };

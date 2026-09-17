@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { getDesign, getVariant } from "@/lib/products";
-import { createGelatoOrder } from "@/lib/gelato";
+import { createGelatoOrder, type GelatoOrderItem } from "@/lib/gelato";
 import { getSiteUrl } from "@/lib/site-url";
 
 export async function POST(request: Request) {
@@ -38,22 +38,49 @@ export async function POST(request: Request) {
 
 async function handleCompletedCheckout(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
-    expand: ["line_items"],
+    expand: ["line_items.data.price.product"],
   });
 
-  const designSlug = session.metadata?.designSlug;
-  const variantId = session.metadata?.variantId;
-  const design = designSlug ? getDesign(designSlug) : undefined;
-  const variant = design && variantId ? getVariant(design, variantId) : undefined;
   const shipping = session.collected_information?.shipping_details;
   const address = shipping?.address ?? session.customer_details?.address;
 
-  if (!design || !variant || !address || !session.customer_details?.email) {
-    console.error("Checkout completed with missing data", {
-      sessionId,
-      designSlug,
-      variantId,
+  if (!address || !session.customer_details?.email) {
+    console.error("Checkout completed with missing shipping/email", { sessionId });
+    return;
+  }
+
+  const siteUrl = getSiteUrl();
+  const items: GelatoOrderItem[] = [];
+
+  for (const lineItem of session.line_items?.data ?? []) {
+    const product = lineItem.price?.product;
+    const metadata = product && typeof product !== "string" && !product.deleted
+      ? product.metadata
+      : undefined;
+    const designSlug = metadata?.designSlug;
+    const variantId = metadata?.variantId;
+    const design = designSlug ? getDesign(designSlug) : undefined;
+    const variant = design && variantId ? getVariant(design, variantId) : undefined;
+
+    if (!design || !variant) {
+      console.error("Line item missing design/variant metadata", {
+        sessionId,
+        designSlug,
+        variantId,
+      });
+      continue;
+    }
+
+    items.push({
+      itemReferenceId: `${design.slug}-${variant.id}`,
+      productUid: variant.gelatoProductUid,
+      quantity: lineItem.quantity ?? 1,
+      files: [{ type: "default", url: `${siteUrl}${variant.imageUrl}` }],
     });
+  }
+
+  if (items.length === 0) {
+    console.error("Checkout completed with no resolvable items", { sessionId });
     return;
   }
 
@@ -63,15 +90,8 @@ async function handleCompletedCheckout(sessionId: string) {
     await createGelatoOrder({
       orderReferenceId: session.id,
       customerReferenceId: session.customer_details.email,
-      currency: (session.currency ?? variant.currency).toUpperCase(),
-      items: [
-        {
-          itemReferenceId: `${design.slug}-${variant.id}`,
-          productUid: variant.gelatoProductUid,
-          quantity: 1,
-          files: [{ type: "default", url: `${getSiteUrl()}${variant.imageUrl}` }],
-        },
-      ],
+      currency: (session.currency ?? "eur").toUpperCase(),
+      items,
       shippingAddress: {
         firstName: firstName || "Cliente",
         lastName: rest.join(" ") || "-",
