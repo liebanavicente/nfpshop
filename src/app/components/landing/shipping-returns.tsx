@@ -29,8 +29,8 @@ export default function ShippingReturns() {
         </div>
         <p className="reveal-on-scroll mt-10 text-sm text-neutral-400">
           {t("shipping.contact")}{" "}
-          <a href="mailto:hola@noflagpatriots.com" className="nav-link text-neutral-300">
-            hola@noflagpatriots.com
+          <a href="mailto:info@noflagpatriots.com" className="nav-link text-neutral-300">
+            info@noflagpatriots.com
           </a>
           .
         </p>

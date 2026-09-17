@@ -44,6 +44,18 @@ function XxxBolt({ className, delay }: { className: string; delay?: string }) {
   );
 }
 
+function EmojiBolt({ className, delay }: { className: string; delay?: string }) {
+  return (
+    <div
+      className={`${className} flex flex-col items-center justify-center gap-6 text-6xl sm:text-8xl`}
+      style={{ animation: "bolt-flash 7s linear infinite", animationDelay: delay }}
+    >
+      <span>☝️</span>
+      <span>🙄</span>
+    </div>
+  );
+}
+
 export default function Lightning() {
   return (
     <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
@@ -51,7 +63,7 @@ export default function Lightning() {
         className="absolute inset-0 bg-white"
         style={{ animation: "screen-flash 7s ease-in-out infinite" }}
       />
-      <XxxBolt className="absolute left-[8%] top-0 h-2/3 w-auto opacity-90" />
+      <EmojiBolt className="absolute left-[8%] top-0 h-2/3 w-auto opacity-90" />
       <XxxBolt
         className="absolute right-[14%] top-0 h-1/2 w-auto opacity-80"
         delay="3.4s"
