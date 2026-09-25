@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLocale, locales } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { OFFICIAL_SITE } from "@/lib/band";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300";
@@ -112,13 +113,19 @@ function CartLink() {
   );
 }
 
+type NavItem = { href: string; label: string; external?: boolean };
+
+function externalProps(item: NavItem) {
+  return item.external ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
 /** Desktop links with a highlight pill that slides between hovered items. */
-function NavLinks({ links }: { links: { href: string; label: string }[] }) {
+function NavLinks({ links }: { links: NavItem[] }) {
   const [pos, setPos] = useState<{ left: number; width: number } | null>(null);
   const [visible, setVisible] = useState(false);
 
   return (
-    <ul className="relative hidden items-center md:flex" onMouseLeave={() => setVisible(false)}>
+    <ul className="relative hidden items-center lg:flex" onMouseLeave={() => setVisible(false)}>
       <span
         aria-hidden="true"
         className={`absolute inset-y-0 left-0 rounded-full bg-white/10 ease-[cubic-bezier(0.22,1,0.36,1)] ${
@@ -134,13 +141,15 @@ function NavLinks({ links }: { links: { href: string; label: string }[] }) {
         <li key={link.href}>
           <a
             href={link.href}
+            {...externalProps(link)}
             onMouseEnter={(e) => {
               setPos({ left: e.currentTarget.offsetLeft, width: e.currentTarget.offsetWidth });
               setVisible(true);
             }}
-            className={`relative block rounded-full px-4 py-2 text-[13px] font-medium text-neutral-300 transition-colors duration-200 hover:text-white ${focusRing}`}
+            className={`relative block whitespace-nowrap rounded-full px-3.5 py-2 text-[13px] font-medium text-neutral-300 transition-colors duration-200 hover:text-white ${focusRing}`}
           >
             {link.label}
+            {link.external && <span aria-hidden="true"> ↗</span>}
           </a>
         </li>
       ))}
@@ -153,10 +162,12 @@ export default function Navbar() {
   const { t, locale, setLocale } = useLocale();
   const scrolled = useScrolled();
 
-  const links = [
+  const links: NavItem[] = [
     { href: "/#colecciones", label: t("nav.colecciones") },
     { href: "/#productos", label: t("nav.productos") },
+    { href: "/#musica", label: t("nav.musica") },
     { href: "/#envio", label: t("nav.envio") },
+    { href: OFFICIAL_SITE, label: t("nav.webOficial"), external: true },
   ];
 
   const solid = scrolled || open;
@@ -194,7 +205,7 @@ export default function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label={open ? t("nav.cerrarMenu") : t("nav.abrirMenu")}
-              className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10 md:hidden ${focusRing}`}
+              className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10 lg:hidden ${focusRing}`}
             >
               <span
                 className={`absolute h-[1.5px] w-4 bg-white transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-[3.5px]"}`}
@@ -207,7 +218,7 @@ export default function Navbar() {
         </nav>
 
         <div
-          className={`grid transition-[grid-template-rows] duration-300 ease-out md:hidden ${
+          className={`grid transition-[grid-template-rows] duration-300 ease-out lg:hidden ${
             open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
           }`}
         >
@@ -217,10 +228,12 @@ export default function Navbar() {
                 <li key={link.href}>
                   <a
                     href={link.href}
+                    {...externalProps(link)}
                     onClick={() => setOpen(false)}
                     className="block py-3 text-lg font-medium text-white"
                   >
                     {link.label}
+                    {link.external && <span aria-hidden="true" className="text-neutral-400"> ↗</span>}
                   </a>
                 </li>
               ))}

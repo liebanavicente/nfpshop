@@ -23,6 +23,8 @@ const dictionaries: Record<Locale, Dict> = {
       idioma: "Idioma",
       abrirMenu: "Abrir menú",
       cerrarMenu: "Cerrar menú",
+      musica: "Música",
+      webOficial: "Web oficial",
     },
     hero: {
       eyebrow: "Nueva colección · Dolphins and Earthquakes",
@@ -32,7 +34,7 @@ const dictionaries: Record<Locale, Dict> = {
         "Camisetas y fundas con el arte de nuestro nuevo disco. Impresas bajo pedido y enviadas en un solo paquete.",
       ctaPrimary: "Comprar ahora",
       ctaSecondary: "Ver colecciones",
-      imageAlt: "Arte de la colección Dolphins and Earthquakes",
+      imageAlt: "Delfín de No Flag Patriots montado en un carrito de la compra con la bandera XXX",
     },
     valueProps: {
       onDemand: "Impreso bajo pedido",
@@ -43,6 +45,14 @@ const dictionaries: Record<Locale, Dict> = {
       securePayBody: "Tarjeta, Klarna y más con Stripe.",
       euShipping: "Envío a la UE",
       euShippingBody: "España, Portugal, Francia, Italia y Alemania.",
+    },
+    music: {
+      eyebrow: "Escucha el disco",
+      heading: "Dolphins and Earthquakes",
+      body: "El nuevo disco de No Flag Patriots, punk rock melódico desde Barcelona. Dale al play mientras eliges tu camiseta.",
+      listenOn: "Escúchalo en",
+      officialSite: "Visita la web oficial",
+      playerTitle: "Reproductor de Spotify: Dolphins and Earthquakes",
     },
     collections: {
       heading: "Colecciones",
@@ -68,6 +78,9 @@ const dictionaries: Record<Locale, Dict> = {
     },
     footer: {
       rights: "No Flag Patriots. Productos impresos bajo demanda.",
+      listen: "Escucha",
+      follow: "Síguenos",
+      officialSite: "Web oficial",
     },
     tienda: {
       heading: "Nuestra tienda",
@@ -109,6 +122,8 @@ const dictionaries: Record<Locale, Dict> = {
       idioma: "Idioma",
       abrirMenu: "Obre el menú",
       cerrarMenu: "Tanca el menú",
+      musica: "Música",
+      webOficial: "Web oficial",
     },
     hero: {
       eyebrow: "Nova col·lecció · Dolphins and Earthquakes",
@@ -118,7 +133,7 @@ const dictionaries: Record<Locale, Dict> = {
         "Samarretes i fundes amb l'art del nostre nou disc. Impreses sota comanda i enviades en un sol paquet.",
       ctaPrimary: "Compra ara",
       ctaSecondary: "Veure col·leccions",
-      imageAlt: "Art de la col·lecció Dolphins and Earthquakes",
+      imageAlt: "Dofí de No Flag Patriots dins d'un carro de la compra amb la bandera XXX",
     },
     valueProps: {
       onDemand: "Imprès sota comanda",
@@ -129,6 +144,14 @@ const dictionaries: Record<Locale, Dict> = {
       securePayBody: "Targeta, Klarna i més amb Stripe.",
       euShipping: "Enviament a la UE",
       euShippingBody: "Espanya, Portugal, França, Itàlia i Alemanya.",
+    },
+    music: {
+      eyebrow: "Escolta el disc",
+      heading: "Dolphins and Earthquakes",
+      body: "El nou disc de No Flag Patriots, punk rock melòdic des de Barcelona. Dona-li al play mentre tries la teva samarreta.",
+      listenOn: "Escolta'l a",
+      officialSite: "Visita la web oficial",
+      playerTitle: "Reproductor de Spotify: Dolphins and Earthquakes",
     },
     collections: {
       heading: "Col·leccions",
@@ -154,6 +177,9 @@ const dictionaries: Record<Locale, Dict> = {
     },
     footer: {
       rights: "No Flag Patriots. Productes impresos sota demanda.",
+      listen: "Escolta",
+      follow: "Segueix-nos",
+      officialSite: "Web oficial",
     },
     tienda: {
       heading: "La nostra botiga",
@@ -195,6 +221,8 @@ const dictionaries: Record<Locale, Dict> = {
       idioma: "Language",
       abrirMenu: "Open menu",
       cerrarMenu: "Close menu",
+      musica: "Music",
+      webOficial: "Official site",
     },
     hero: {
       eyebrow: "New collection · Dolphins and Earthquakes",
@@ -204,7 +232,7 @@ const dictionaries: Record<Locale, Dict> = {
         "Tees and cases featuring the artwork from our new record. Printed on demand and shipped in a single package.",
       ctaPrimary: "Shop now",
       ctaSecondary: "View collections",
-      imageAlt: "Artwork from the Dolphins and Earthquakes collection",
+      imageAlt: "No Flag Patriots dolphin riding a shopping cart with the XXX flag",
     },
     valueProps: {
       onDemand: "Printed on demand",
@@ -215,6 +243,14 @@ const dictionaries: Record<Locale, Dict> = {
       securePayBody: "Card, Klarna and more via Stripe.",
       euShipping: "EU shipping",
       euShippingBody: "Spain, Portugal, France, Italy and Germany.",
+    },
+    music: {
+      eyebrow: "Listen to the record",
+      heading: "Dolphins and Earthquakes",
+      body: "The new record from No Flag Patriots, melodic punk rock from Barcelona. Hit play while you pick your tee.",
+      listenOn: "Listen on",
+      officialSite: "Visit the official site",
+      playerTitle: "Spotify player: Dolphins and Earthquakes",
     },
     collections: {
       heading: "Collections",
@@ -240,6 +276,9 @@ const dictionaries: Record<Locale, Dict> = {
     },
     footer: {
       rights: "No Flag Patriots. Products printed on demand.",
+      listen: "Listen",
+      follow: "Follow us",
+      officialSite: "Official site",
     },
     tienda: {
       heading: "Our store",

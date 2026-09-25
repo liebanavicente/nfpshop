@@ -45,20 +45,13 @@ body {
   animation: hero-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-@keyframes hero-media-scale {
-  from {
-    transform: scale(0.92);
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
   }
-  to {
-    transform: scale(1);
-  }
-}
-
-@supports (animation-timeline: view()) {
-  .hero-media {
-    animation: hero-media-scale linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 45%;
+  50% {
+    transform: translateY(-12px) rotate(-1deg);
   }
 }
 
