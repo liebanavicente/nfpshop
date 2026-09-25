@@ -10,7 +10,8 @@ export const SPOTIFY_ALBUM_ID = "0XJxiefRCP9VlMo3mKviKB"; // Dolphins and Earthq
 
 export const listenLinks: { name: string; icon: BrandIcon; href: string }[] = [
   { name: "Spotify", icon: "spotify", href: "https://open.spotify.com/artist/5nP4sYDTtqRYISVJsbv6FZ" },
-  { name: "YouTube Music", icon: "youtubeMusic", href: "https://music.youtube.com/playlist?list=OLAK5uy_mpBtJdcgfEpvtwGu-JSpXz7JRbv2dcD2U" },
+  // Dolphins and Earthquakes (the linktree's YouTube Music link is the older self-titled album).
+  { name: "YouTube Music", icon: "youtubeMusic", href: "https://music.youtube.com/playlist?list=OLAK5uy_lHU8aq2Hga3aL2SZWPL87LNNl2wUcqrQY" },
   { name: "Amazon Music", icon: "amazonMusic", href: "https://music.amazon.de/artists/B09DFPML2P/no-flag-patriots" },
   { name: "Deezer", icon: "deezer", href: "https://www.deezer.com/us/artist/143205762" },
   { name: "Bandcamp", icon: "bandcamp", href: "https://noflagpatriots.bandcamp.com" },

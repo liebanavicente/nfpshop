@@ -5,6 +5,7 @@ import Footer from "@/app/components/landing/footer";
 import AmbientBackground from "@/app/components/ambient-background";
 import { LocaleProvider } from "@/lib/i18n";
 import { CartProvider } from "@/lib/cart";
+import { MusicProvider } from "@/app/components/music-player";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -35,9 +36,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <AmbientBackground />
         <LocaleProvider>
           <CartProvider>
-            <Navbar />
-            {children}
-            <Footer />
+            <MusicProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </MusicProvider>
           </CartProvider>
         </LocaleProvider>
       </body>

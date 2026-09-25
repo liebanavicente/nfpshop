@@ -3,10 +3,12 @@
 import Image from "next/image";
 import BrandIcon from "@/app/components/brand-icon";
 import { useLocale } from "@/lib/i18n";
-import { OFFICIAL_SITE, SPOTIFY_ALBUM_ID, listenLinks } from "@/lib/band";
+import { OFFICIAL_SITE, listenLinks } from "@/lib/band";
+import { useMusic } from "@/app/components/music-player";
 
 export default function Music() {
   const { t } = useLocale();
+  const { isPlaying, playFromUser } = useMusic();
 
   return (
     <section id="musica" className="scroll-mt-24 px-4 py-24 sm:px-6">
@@ -55,16 +57,41 @@ export default function Music() {
               </a>
             </div>
 
-            <div className="overflow-hidden rounded-2xl">
-              <iframe
-                title={t("music.playerTitle")}
-                src={`https://open.spotify.com/embed/album/${SPOTIFY_ALBUM_ID}?utm_source=generator&theme=0`}
-                width="100%"
-                height="352"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                className="block border-0"
+            {/* One player for the whole site (the dock) — a second embed here would play over it. */}
+            <div className="mx-auto w-full max-w-sm lg:max-w-md">
+              <Image
+                src="/album-dolphins-and-earthquakes.jpg"
+                alt="Dolphins and Earthquakes"
+                width={640}
+                height={640}
+                sizes="(min-width: 1024px) 448px, 384px"
+                className="h-auto w-full rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
               />
+              <button
+                type="button"
+                onClick={playFromUser}
+                disabled={isPlaying}
+                className="glass glass-hover mt-4 flex w-full items-center gap-3 rounded-full py-2 pl-2 pr-5 text-sm font-medium text-white disabled:cursor-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-black">
+                  {isPlaying ? (
+                    <span aria-hidden="true" className="flex h-3 items-end gap-[2px]">
+                      {[0, 1, 2].map((i) => (
+                        <span
+                          key={i}
+                          className="h-full w-[3px] origin-bottom rounded-full bg-black"
+                          style={{ animation: `eq-bar 900ms ease-in-out ${i * 150}ms infinite alternate` }}
+                        />
+                      ))}
+                    </span>
+                  ) : (
+                    <svg viewBox="0 0 24 24" className="ml-0.5 h-4 w-4" fill="currentColor" aria-hidden="true">
+                      <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" />
+                    </svg>
+                  )}
+                </span>
+                {isPlaying ? t("player.nowPlaying") : t("music.playCta")}
+              </button>
             </div>
           </div>
         </div>
