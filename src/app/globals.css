@@ -28,127 +28,37 @@ body {
   }
 }
 
-/* --- Landing: punk motion tokens --- */
+/* --- Hero motion --- */
 
-@keyframes stamp-impact {
-  0% {
+@keyframes hero-in {
+  from {
     opacity: 0;
-    transform: scale(1.6) rotate(-8deg);
-    filter: drop-shadow(0 0 0 rgba(120, 180, 255, 0));
+    transform: translateY(16px);
   }
-  55% {
+  to {
     opacity: 1;
-    transform: scale(0.94) rotate(2deg);
-    filter: drop-shadow(0 0 40px rgba(120, 180, 255, 0.55));
-  }
-  75% {
-    transform: scale(1.03) rotate(-1deg);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-    filter: drop-shadow(0 0 18px rgba(120, 180, 255, 0.35));
+    transform: none;
   }
 }
 
-@keyframes shockwave {
-  0% {
-    opacity: 0.9;
-    transform: scale(0.4);
+.hero-in {
+  animation: hero-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes hero-media-scale {
+  from {
+    transform: scale(0.92);
   }
-  100% {
-    opacity: 0;
-    transform: scale(2.2);
+  to {
+    transform: scale(1);
   }
 }
 
-@keyframes glow-pulse {
-  0%,
-  100% {
-    filter: drop-shadow(0 0 14px rgba(120, 180, 255, 0.3));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(120, 180, 255, 0.6));
-  }
-}
-
-@keyframes bolt-flash {
-  0%,
-  92%,
-  100% {
-    opacity: 0;
-  }
-  93% {
-    opacity: 1;
-  }
-  94% {
-    opacity: 0.3;
-  }
-  95% {
-    opacity: 1;
-  }
-  97% {
-    opacity: 0;
-  }
-}
-
-@keyframes screen-flash {
-  0%,
-  92%,
-  100% {
-    opacity: 0;
-  }
-  93% {
-    opacity: 0.35;
-  }
-  94% {
-    opacity: 0;
-  }
-  95% {
-    opacity: 0.2;
-  }
-  96% {
-    opacity: 0;
-  }
-}
-
-@keyframes glitch-in {
-  0% {
-    opacity: 0;
-    clip-path: inset(0 0 100% 0);
-    transform: translate(0, 6px);
-  }
-  20% {
-    opacity: 1;
-    clip-path: inset(0 0 60% 0);
-    transform: translate(-6px, 0);
-  }
-  35% {
-    clip-path: inset(30% 0 20% 0);
-    transform: translate(5px, 0);
-  }
-  50% {
-    clip-path: inset(0 0 0 0);
-    transform: translate(-3px, 0);
-  }
-  65% {
-    transform: translate(3px, 0);
-  }
-  100% {
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translate(0, 0);
-  }
-}
-
-@keyframes spark-out {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--spark-x, 20px), var(--spark-y, -20px)) scale(0);
+@supports (animation-timeline: view()) {
+  .hero-media {
+    animation: hero-media-scale linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
   }
 }
 
@@ -218,23 +128,6 @@ body {
 
 .nav-link:hover::after {
   transform: scaleX(1);
-}
-
-.cta-spark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  border-radius: 9999px;
-  background: #7dd3fc;
-  opacity: 0;
-  animation: spark-out 500ms ease-out forwards;
-  animation-play-state: paused;
-}
-
-.cta:hover .cta-spark {
-  animation-play-state: running;
 }
 
 /* --- Dark glass system (adapted from open-design's glassmorphism tokens) --- */
