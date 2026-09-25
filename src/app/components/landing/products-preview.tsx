@@ -15,7 +15,7 @@ export default function ProductsPreview() {
   const { t } = useLocale();
   const featured = designs.slice(0, 4);
   return (
-    <section id="productos" className="scroll-mt-16 bg-neutral-950 px-4 py-24 sm:px-6">
+    <section id="productos" className="scroll-mt-24 px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-6xl">
         <h2 className="reveal-on-scroll mb-10 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white sm:text-4xl">
           {t("products.heading")}
@@ -24,26 +24,31 @@ export default function ProductsPreview() {
           {featured.map((design) => {
             const variant = design.variants[0];
             return (
-              <Link
-                key={design.slug}
-                href={`/producto/${design.slug}`}
-                className="reveal-on-scroll group block border border-white/10 bg-black transition-transform duration-200 ease-out hover:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
-              >
-                <ProductImage design={design} variant={variant} />
-                <div className="p-3">
-                  <h3 className="truncate text-sm text-white">{design.name}</h3>
-                  <p className="mt-1 text-sm font-semibold text-sky-300">
-                    {formatPrice(variant.priceCents, variant.currency)}
-                  </p>
-                </div>
-              </Link>
+              // reveal-on-scroll animates transform, which would override the
+              // hover lift if both lived on the same element.
+              <div key={design.slug} className="reveal-on-scroll">
+                <Link
+                  href={`/producto/${design.slug}`}
+                  className="glass glass-hover block overflow-hidden rounded-3xl p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
+                >
+                  <div className="overflow-hidden rounded-2xl">
+                    <ProductImage design={design} variant={variant} />
+                  </div>
+                  <div className="px-2 pb-2 pt-3">
+                    <h3 className="truncate text-sm text-white">{design.name}</h3>
+                    <p className="mt-1 text-sm font-semibold text-sky-300">
+                      {formatPrice(variant.priceCents, variant.currency)}
+                    </p>
+                  </div>
+                </Link>
+              </div>
             );
           })}
         </div>
-        <div className="mt-10 text-center">
+        <div className="mt-12 text-center">
           <Link
             href="/tienda"
-            className="nav-link font-[family-name:var(--font-display)] text-lg uppercase tracking-widest text-white"
+            className="glass glass-hover inline-flex items-center gap-2 rounded-full px-6 py-3 font-[family-name:var(--font-display)] text-sm uppercase tracking-widest text-white"
           >
             {t("products.verTodo")} →
           </Link>

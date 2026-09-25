@@ -35,10 +35,14 @@ function Section({
             <Link
               key={design.slug}
               href={`/producto/${design.slug}`}
-              className="overflow-hidden border border-white/10 bg-neutral-950 transition-colors hover:border-sky-300/50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
+              className="glass glass-hover overflow-hidden rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
             >
-              <ProductImage design={design} variant={fromPrice} />
-              <div className="p-4">
+              <div className="p-2 pb-0">
+                <div className="overflow-hidden rounded-2xl">
+                  <ProductImage design={design} variant={fromPrice} />
+                </div>
+              </div>
+              <div className="p-4 pt-3">
                 <h3 className="font-semibold text-white">{design.name}</h3>
                 <p className="mt-1 text-sm text-neutral-400">{design.description}</p>
                 <p className="mt-3 font-medium text-sky-300">

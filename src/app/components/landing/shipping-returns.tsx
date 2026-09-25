@@ -12,14 +12,14 @@ export default function ShippingReturns() {
   ];
 
   return (
-    <section id="envio" className="scroll-mt-16 bg-black px-4 py-24 sm:px-6">
+    <section id="envio" className="scroll-mt-24 px-4 py-24 sm:px-6">
       <div className="mx-auto max-w-3xl">
         <h2 className="reveal-on-scroll mb-10 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white sm:text-4xl">
           {t("shipping.heading")}
         </h2>
-        <div className="space-y-8">
+        <div className="space-y-4">
           {items.map((item) => (
-            <div key={item.title} className="reveal-on-scroll border-l-2 border-sky-300/60 pl-5">
+            <div key={item.title} className="reveal-on-scroll glass rounded-3xl p-6 sm:p-7">
               <h3 className="font-[family-name:var(--font-display)] text-lg uppercase tracking-wide text-white">
                 {item.title}
               </h3>

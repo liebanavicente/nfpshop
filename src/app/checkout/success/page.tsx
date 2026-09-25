@@ -10,8 +10,10 @@ export default async function SuccessPage({
 
   if (!session_id) {
     return (
-      <main className="mx-auto max-w-2xl px-4 pb-20 pt-36 text-center">
-        <OrderNotFound />
+      <main className="mx-auto w-full max-w-xl px-4 pb-20 pt-32">
+        <div className="glass rounded-3xl px-6 py-12 text-center">
+          <OrderNotFound />
+        </div>
       </main>
     );
   }
@@ -19,8 +21,10 @@ export default async function SuccessPage({
   const session = await stripe.checkout.sessions.retrieve(session_id);
 
   return (
-    <main className="mx-auto max-w-2xl px-4 pb-20 pt-36 text-center">
-      <OrderSuccess email={session.customer_details?.email} />
+    <main className="mx-auto w-full max-w-xl px-4 pb-20 pt-32">
+      <div className="glass rounded-3xl px-6 py-12 text-center">
+        <OrderSuccess email={session.customer_details?.email} />
+      </div>
     </main>
   );
 }

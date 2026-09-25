@@ -236,3 +236,89 @@ body {
 .cta:hover .cta-spark {
   animation-play-state: running;
 }
+
+/* --- Dark glass system (adapted from open-design's glassmorphism tokens) --- */
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.055);
+  --glass-bg-strong: rgba(12, 14, 20, 0.62);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-hover: rgba(125, 211, 252, 0.45);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  --glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+  --glass-glow: 0 24px 80px rgba(125, 211, 252, 0.16);
+  --ease-glass: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.glass,
+.glass-strong {
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), var(--glass-highlight);
+  -webkit-backdrop-filter: blur(20px) saturate(1.5);
+  backdrop-filter: blur(20px) saturate(1.5);
+}
+
+.glass {
+  background: var(--glass-bg);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+}
+
+.glass-hover {
+  transition:
+    transform 250ms var(--ease-glass),
+    border-color 250ms var(--ease-glass),
+    box-shadow 250ms var(--ease-glass);
+}
+
+.glass-hover:hover {
+  transform: translateY(-3px);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-glow), var(--glass-highlight);
+}
+
+/* Without backdrop blur, a 5% white panel is unreadable over busy art. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass {
+    background: rgba(20, 22, 28, 0.88);
+  }
+  .glass-strong {
+    background: rgba(12, 14, 20, 0.94);
+  }
+}
+
+/* Ambient backdrop: gives the glass something to frost on otherwise-flat pages. */
+@keyframes orb-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(8vw, 6vh) scale(1.15);
+  }
+}
+
+@keyframes orb-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.1);
+  }
+  50% {
+    transform: translate(-10vw, -4vh) scale(0.95);
+  }
+}
+
+.ambient-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  will-change: transform;
+}
+
+.grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>");
+  mix-blend-mode: overlay;
+  opacity: 0.12;
+}

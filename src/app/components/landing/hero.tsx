@@ -7,18 +7,21 @@ import CtaButton from "@/app/components/landing/cta-button";
 
 export default function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black">
-      <Image
-        src="/hero-bg.jpg"
-        alt=""
-        fill
-        priority
-        className="object-cover opacity-70"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_75%)]" />
-      <Lightning />
-      <EmberCanvas />
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+      {/* Masked so the hero art fades into the site-wide ambient backdrop instead of ending in a hard black edge. */}
+      <div className="absolute inset-0 bg-black [mask-image:linear-gradient(to_bottom,black_70%,transparent)]">
+        <Image
+          src="/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          className="object-cover opacity-70"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.6)_75%)]" />
+        <Lightning />
+        <EmberCanvas />
+      </div>
 
       <div className="relative z-10 flex flex-col items-center px-4 py-32">
         <LogoImpact />

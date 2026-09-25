@@ -7,7 +7,7 @@ export default function GlitchTitle() {
   return (
     <div className="text-center">
       <p
-        className="mb-2 text-sm tracking-[0.3em] text-neutral-300 sm:text-base"
+        className="glass mb-5 inline-block rounded-full px-4 py-1.5 text-xs tracking-[0.3em] text-neutral-200 sm:text-sm"
         style={{ animation: "glitch-in 0.6s cubic-bezier(0.2,0,0,1) 0.15s both" }}
       >
         <span className="sm:hidden">{t("hero.welcomeShort")}</span>
