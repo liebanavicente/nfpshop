@@ -20,10 +20,28 @@ const specialElite = Special_Elite({
   subsets: ["latin"],
 });
 
+const title = "No Flag Patriots — Merch oficial";
+const description =
+  "Camisetas y fundas con el arte de Dolphins and Earthquakes, el nuevo disco de No Flag Patriots. Impresas bajo pedido.";
+
+// The share image itself comes from app/opengraph-image.jpg (file-based metadata wins
+// over config); X falls back to it when there is no twitter:image.
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
-  title: "No Flag Patriots — Merch",
-  description: "Merchandising de nuestra banda, NFP.",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: "No Flag Patriots",
+    locale: "es_ES",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
