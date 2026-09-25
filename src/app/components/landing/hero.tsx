@@ -65,10 +65,13 @@ export default function Hero() {
         </p>
 
         <h1
-          className="hero-in mt-7 text-[2.6rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-7xl lg:text-8xl"
+          className="hero-in mt-7 text-[clamp(2.1rem,10.5vw,2.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-7xl lg:text-8xl"
           style={{ animationDelay: "80ms" }}
         >
-          {t("hero.titleLine1")}
+          {/* Special Elite ships a single 400 weight — font-normal avoids a synthesized faux-bold. */}
+          <span className="font-[family-name:var(--font-display)] font-normal tracking-[-0.02em]">
+            {t("hero.titleLine1")}
+          </span>
           <br />
           <span className="text-neutral-500">{t("hero.titleLine2")}</span>
         </h1>

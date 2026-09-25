@@ -4,10 +4,10 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export type Locale = "es" | "ca" | "en";
 
-export const locales: { id: Locale; label: string }[] = [
-  { id: "es", label: "ES" },
-  { id: "ca", label: "CA" },
-  { id: "en", label: "EN" },
+export const locales: { id: Locale; label: string; name: string }[] = [
+  { id: "es", label: "ES", name: "Español" },
+  { id: "ca", label: "CA", name: "Català" },
+  { id: "en", label: "EN", name: "English" },
 ];
 
 type Dict = Record<string, unknown>;
@@ -18,8 +18,11 @@ const dictionaries: Record<Locale, Dict> = {
       colecciones: "Colecciones",
       productos: "Productos",
       envio: "Envío y devoluciones",
-      entrar: "Entrar",
+      tienda: "Tienda",
       carrito: "Carrito",
+      idioma: "Idioma",
+      abrirMenu: "Abrir menú",
+      cerrarMenu: "Cerrar menú",
     },
     hero: {
       eyebrow: "Nueva colección · Dolphins and Earthquakes",
@@ -101,8 +104,11 @@ const dictionaries: Record<Locale, Dict> = {
       colecciones: "Col·leccions",
       productos: "Productes",
       envio: "Enviament i devolucions",
-      entrar: "Entra",
+      tienda: "Botiga",
       carrito: "Cistella",
+      idioma: "Idioma",
+      abrirMenu: "Obre el menú",
+      cerrarMenu: "Tanca el menú",
     },
     hero: {
       eyebrow: "Nova col·lecció · Dolphins and Earthquakes",
@@ -184,8 +190,11 @@ const dictionaries: Record<Locale, Dict> = {
       colecciones: "Collections",
       productos: "Products",
       envio: "Shipping & returns",
-      entrar: "Enter",
+      tienda: "Shop",
       carrito: "Cart",
+      idioma: "Language",
+      abrirMenu: "Open menu",
+      cerrarMenu: "Close menu",
     },
     hero: {
       eyebrow: "New collection · Dolphins and Earthquakes",
