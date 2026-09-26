@@ -27,12 +27,12 @@ body {
     scroll-behavior: auto !important;
   }
 
-  .hero-stage {
-    background: #07101d url("/hero-fashion-poster.png") 64% center / cover no-repeat;
-  }
-
   .hero-film {
     display: none;
+  }
+
+  .hero-finale {
+    opacity: 1 !important;
   }
 }
 

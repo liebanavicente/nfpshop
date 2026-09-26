@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n";
 
@@ -54,6 +56,7 @@ const valueProps = [
 
 export default function Hero() {
   const { t } = useLocale();
+  const [videoEnded, setVideoEnded] = useState(false);
 
   return (
     <section className="pb-8">
@@ -61,15 +64,35 @@ export default function Hero() {
         <video
           aria-hidden="true"
           autoPlay
-          loop
           muted
           playsInline
           poster="/hero-fashion-poster.png"
-          preload="metadata"
-          className="hero-film absolute inset-0 -z-30 h-full w-full object-cover object-[64%_center] sm:object-center"
+          preload="auto"
+          onEnded={() => setVideoEnded(true)}
+          onError={() => setVideoEnded(true)}
+          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover object-[64%_center] transition-opacity duration-700 sm:object-center ${
+            videoEnded ? "opacity-0" : "opacity-100"
+          }`}
         >
           <source src="/videos/nfp-eyes-in-dolphin.mp4" type="video/mp4" />
         </video>
+        <div
+          aria-hidden="true"
+          className={`hero-finale absolute inset-0 -z-30 flex items-center justify-center transition-opacity duration-700 ${
+            videoEnded ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div className="absolute h-[62%] w-[62%] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.24)_0%,rgba(30,58,138,0.16)_45%,transparent_72%)] blur-3xl" />
+          <Image
+            src="/hero-dolphin-cart.png"
+            alt=""
+            width={1297}
+            height={1199}
+            priority
+            sizes="(min-width: 1024px) 700px, 86vw"
+            className="relative h-auto w-[min(86vw,700px)] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
+          />
+        </div>
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-20 bg-[linear-gradient(0deg,rgba(3,6,12,0.9)_0%,rgba(3,7,16,0.7)_38%,rgba(3,7,16,0.12)_76%),linear-gradient(90deg,rgba(3,7,16,0.98)_0%,rgba(3,7,16,0.88)_32%,rgba(3,7,16,0.28)_60%,rgba(3,7,16,0.06)_100%)] sm:bg-[linear-gradient(90deg,rgba(3,7,16,0.98)_0%,rgba(3,7,16,0.9)_28%,rgba(3,7,16,0.4)_55%,rgba(3,7,16,0.04)_82%),linear-gradient(0deg,rgba(3,6,12,0.7)_0%,transparent_38%)]"
