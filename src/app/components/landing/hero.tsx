@@ -78,13 +78,8 @@ export default function Hero() {
 
         <div className="mx-auto grid min-h-[570px] max-w-6xl items-end gap-12 sm:min-h-[600px] lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
           <div className="pb-2 text-center lg:pb-0 lg:text-left">
-            <p className="hero-in glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-neutral-300 sm:text-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-300 shadow-[0_0_8px_rgba(125,211,252,0.9)]" />
-              {t("hero.eyebrow")}
-            </p>
-
             <h1
-              className="hero-in mt-7 text-[clamp(2.1rem,10.5vw,2.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl lg:text-[clamp(3.2rem,4.6vw,4rem)]"
+              className="hero-in text-[clamp(2.1rem,10.5vw,2.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl lg:text-[clamp(3.2rem,4.6vw,4rem)]"
               style={{ animationDelay: "80ms" }}
             >
               {/* Special Elite ships a single 400 weight — font-normal avoids a synthesized faux-bold. */}
