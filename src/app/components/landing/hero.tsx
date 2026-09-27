@@ -54,6 +54,17 @@ const valueProps = [
   },
 ];
 
+function syncMobileFocus(video: HTMLVideoElement) {
+  if (!window.matchMedia("(max-width: 639px)").matches) {
+    video.style.objectPosition = "50% center";
+    return;
+  }
+
+  const progress = Math.min(Math.max((video.currentTime - 2.8) / 1.7, 0), 1);
+  const eased = progress * progress * (3 - 2 * progress);
+  video.style.objectPosition = `${72 - 22 * eased}% center`;
+}
+
 export default function Hero() {
   const { t } = useLocale();
   const [videoEnded, setVideoEnded] = useState(false);
@@ -68,9 +79,11 @@ export default function Hero() {
           playsInline
           poster="/hero-fashion-poster.png"
           preload="auto"
+          onLoadedMetadata={(event) => syncMobileFocus(event.currentTarget)}
+          onTimeUpdate={(event) => syncMobileFocus(event.currentTarget)}
           onEnded={() => setVideoEnded(true)}
           onError={() => setVideoEnded(true)}
-          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover object-[72%_center] transition-opacity duration-700 sm:object-center ${
+          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover transition-opacity duration-700 ${
             videoEnded ? "opacity-0" : "opacity-100"
           }`}
         >
@@ -90,7 +103,9 @@ export default function Hero() {
             height={1199}
             priority
             sizes="(min-width: 1024px) 700px, 86vw"
-            className="relative h-auto w-[min(86vw,700px)] drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
+            className={`relative h-auto w-[min(86vw,700px)] transition-transform duration-700 ease-out drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] ${
+              videoEnded ? "scale-100" : "scale-[1.7] sm:scale-100"
+            }`}
           />
         </div>
         <div
