@@ -46,6 +46,14 @@ const dictionaries: Record<Locale, Dict> = {
       euShipping: "Envío a la UE",
       euShippingBody: "España, Portugal, Francia, Italia y Alemania.",
     },
+    lookbook: {
+      eyebrow: "Lookbook · Dolphins and Earthquakes",
+      heading: "Llévalo a donde vayas",
+      cta: "Comprar el look",
+      videoLabel: "Vídeo lookbook: camisetas y sudadera de No Flag Patriots en la playa, un skatepark y una azotea",
+      play: "Reproducir vídeo",
+      pause: "Pausar vídeo",
+    },
     music: {
       eyebrow: "Escucha el disco",
       heading: "Dolphins and Earthquakes",
@@ -155,6 +163,14 @@ const dictionaries: Record<Locale, Dict> = {
       euShipping: "Enviament a la UE",
       euShippingBody: "Espanya, Portugal, França, Itàlia i Alemanya.",
     },
+    lookbook: {
+      eyebrow: "Lookbook · Dolphins and Earthquakes",
+      heading: "Porta'l allà on vagis",
+      cta: "Compra el look",
+      videoLabel: "Vídeo lookbook: samarretes i dessuadora de No Flag Patriots a la platja, un skatepark i un terrat",
+      play: "Reprodueix el vídeo",
+      pause: "Pausa el vídeo",
+    },
     music: {
       eyebrow: "Escolta el disc",
       heading: "Dolphins and Earthquakes",
@@ -263,6 +279,14 @@ const dictionaries: Record<Locale, Dict> = {
       securePayBody: "Card, Klarna and more via Stripe.",
       euShipping: "EU shipping",
       euShippingBody: "Spain, Portugal, France, Italy and Germany.",
+    },
+    lookbook: {
+      eyebrow: "Lookbook · Dolphins and Earthquakes",
+      heading: "Wear it anywhere",
+      cta: "Shop the look",
+      videoLabel: "Lookbook video: No Flag Patriots tees and sweatshirt at the beach, a skatepark and a rooftop",
+      play: "Play video",
+      pause: "Pause video",
     },
     music: {
       eyebrow: "Listen to the record",
