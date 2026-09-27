@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Special_Elite } from "next/font/google";
+import { IBM_Plex_Mono, Special_Elite } from "next/font/google";
 import Navbar from "@/app/components/landing/navbar";
 import Footer from "@/app/components/landing/footer";
 import AmbientBackground from "@/app/components/ambient-background";
@@ -9,8 +9,9 @@ import { MusicProvider } from "@/app/components/music-player";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodyMono = IBM_Plex_Mono({
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -48,7 +49,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${specialElite.variable} h-full antialiased`}
+      className={`${bodyMono.variable} ${specialElite.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-black text-white">
         <AmbientBackground />

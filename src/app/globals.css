@@ -8,7 +8,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-body);
   --font-display: var(--font-display);
 }
 
@@ -180,6 +180,29 @@ body {
   transform: translateY(-3px);
   border-color: var(--glass-border-hover);
   box-shadow: var(--glass-glow), var(--glass-highlight);
+}
+
+/* Hard-edged screen-print treatment for the primary merchandising surfaces. */
+.punk-card {
+  position: relative;
+  border-radius: 2px !important;
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    6px 6px 0 rgba(0, 0, 0, 0.52),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  clip-path: polygon(7px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 7px);
+}
+
+.punk-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(104deg, transparent 0 37px, rgba(255, 255, 255, 0.025) 38px, transparent 40px),
+    linear-gradient(168deg, transparent 0 64%, rgba(255, 255, 255, 0.035) 64.2%, transparent 64.8%);
+  mix-blend-mode: screen;
 }
 
 /* Without backdrop blur, a 5% white panel is unreadable over busy art. */

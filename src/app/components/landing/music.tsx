@@ -13,7 +13,7 @@ export default function Music() {
   return (
     <section id="musica" className="scroll-mt-24 px-4 py-24 sm:px-6">
       <div className="reveal-on-scroll mx-auto max-w-6xl">
-        <div className="glass relative overflow-hidden rounded-[2rem]">
+        <div className="punk-card glass relative overflow-hidden">
           <Image src="/hero-bg.jpg" alt="" fill sizes="(min-width: 1152px) 1152px, 100vw" className="object-cover opacity-30" />
           <div className="absolute inset-0 bg-gradient-to-b from-[#07080c]/90 via-[#07080c]/75 to-[#07080c]/60 lg:bg-gradient-to-r lg:to-[#07080c]/40" />
 
@@ -65,7 +65,7 @@ export default function Music() {
                 width={640}
                 height={640}
                 sizes="(min-width: 1024px) 448px, 384px"
-                className="h-auto w-full rounded-3xl shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
+                className="h-auto w-full rounded-sm shadow-[0_30px_80px_rgba(0,0,0,0.6)]"
               />
               <button
                 type="button"

@@ -29,13 +29,13 @@ export default function ProductsPreview() {
               <div key={design.slug} className="reveal-on-scroll">
                 <Link
                   href={`/producto/${design.slug}`}
-                  className="glass glass-hover block overflow-hidden rounded-3xl p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
+                  className="punk-card glass glass-hover block overflow-hidden p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
                 >
-                  <div className="overflow-hidden rounded-2xl">
+                  <div className="overflow-hidden rounded-sm">
                     <ProductImage design={design} variant={variant} />
                   </div>
                   <div className="px-2 pb-2 pt-3">
-                    <h3 className="truncate text-sm text-white">{design.name}</h3>
+                    <h3 className="truncate text-sm font-semibold uppercase text-white">{design.name}</h3>
                     <p className="mt-1 text-sm font-semibold text-sky-300">
                       {formatPrice(variant.priceCents, variant.currency)}
                     </p>

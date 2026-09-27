@@ -70,7 +70,7 @@ export default function Hero() {
           preload="auto"
           onEnded={() => setVideoEnded(true)}
           onError={() => setVideoEnded(true)}
-          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover object-[64%_center] transition-opacity duration-700 sm:object-center ${
+          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover object-[72%_center] transition-opacity duration-700 sm:object-center ${
             videoEnded ? "opacity-0" : "opacity-100"
           }`}
         >
@@ -148,9 +148,9 @@ export default function Hero() {
 
       <ul className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 px-4 sm:px-6 md:grid-cols-4 lg:mt-10">
         {valueProps.map(({ key, icon }) => (
-          <li key={key} className="glass rounded-2xl p-5">
+          <li key={key} className="punk-card glass p-5">
             <span className="text-sky-300">{icon}</span>
-            <p className="mt-3 text-sm font-semibold text-white">{t(`valueProps.${key}`)}</p>
+            <p className="mt-3 text-sm font-bold uppercase text-white">{t(`valueProps.${key}`)}</p>
             <p className="mt-1 text-sm leading-snug text-neutral-400">{t(`valueProps.${key}Body`)}</p>
           </li>
         ))}

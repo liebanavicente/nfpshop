@@ -33,7 +33,7 @@ export default function Collections() {
             <div key={c.href} className="reveal-on-scroll">
               <Link
                 href={c.href}
-                className={`glass glass-hover group relative flex aspect-[4/3] items-end overflow-hidden rounded-3xl ${c.bg} focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300`}
+                className={`punk-card glass glass-hover group relative flex aspect-[4/3] items-end overflow-hidden ${c.bg} focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300`}
               >
                 <Image
                   src={c.image}

@@ -19,7 +19,7 @@ export default function ShippingReturns() {
         </h2>
         <div className="space-y-4">
           {items.map((item) => (
-            <div key={item.title} className="reveal-on-scroll glass rounded-3xl p-6 sm:p-7">
+            <div key={item.title} className="punk-card reveal-on-scroll glass p-6 sm:p-7">
               <h3 className="font-[family-name:var(--font-display)] text-lg uppercase tracking-wide text-white">
                 {item.title}
               </h3>
