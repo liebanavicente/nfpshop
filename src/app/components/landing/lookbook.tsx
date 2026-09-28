@@ -59,8 +59,8 @@ export default function Lookbook() {
           <div className="relative aspect-video overflow-hidden bg-neutral-950">
             <video
               ref={videoRef}
-              src="/videos/nfpgrok2.mp4"
-              poster="/videos/nfpgrok2-poster.jpg"
+              src="/videos/nfpcommercial.mp4"
+              poster="/videos/nfpcommercial-poster.jpg"
               muted
               loop
               playsInline
