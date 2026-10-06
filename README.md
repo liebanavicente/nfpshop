@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NFP Clothing
 
-## Getting Started
+**Tienda online de merchandising del grupo No Flag Patriots, con impresión bajo pedido y sin stock propio.**
 
-First, run the development server:
+[nfpclothing.com](https://www.nfpclothing.com)
+
+![Portada de NFP Clothing](docs/captura.jpg)
+
+## Cómo funciona
+
+1. El cliente elige diseño, prenda y talla, y lo añade al carrito.
+2. Paga sin salir de la tienda con **Stripe Embedded Checkout**.
+3. Stripe avisa a la tienda con un **webhook firmado** (`/api/webhooks/stripe`, se verifica la firma antes de hacer nada).
+4. La tienda crea el pedido en **Gelato** por API: ellos imprimen la prenda y la envían al cliente.
+
+Así no hace falta stock ni gestionar envíos: cada venta se imprime cuando ya está pagada.
+
+## Qué incluye
+
+- Catálogo de 14 productos con variantes (prenda, color y talla) y maquetas de cada diseño.
+- Carrito persistente, página de producto y página de pedido completado.
+- Portada con colecciones, lookbook y reproductor con la música del grupo.
+- Tres idiomas: español, catalán e inglés.
+- Imagen para compartir en redes (Open Graph) e iconos propios.
+
+## Stack
+
+Next.js 16 (App Router, Server Actions) · React 19 · TypeScript · Tailwind CSS · Stripe · Gelato API · Vercel
+
+## Desarrollo
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Variables necesarias en `.env.local`: `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET`,
+`GELATO_API_KEY` y `NEXT_PUBLIC_SITE_URL`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Para explorar el catálogo de Gelato desde la terminal: `node scripts/gelato-search.mjs catalogs` (más opciones dentro del
+script).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Hecho por [Miguel Liébana](https://miguelliebana.com), también compositor y cantante del grupo.
