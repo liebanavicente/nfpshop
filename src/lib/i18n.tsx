@@ -94,6 +94,25 @@ const dictionaries: Record<Locale, Dict> = {
         "Al ser productos personalizados hechos bajo pedido, no se aceptan devoluciones por cambio de opinión ni por talla. Si tu pedido llega dañado, defectuoso o con un error nuestro, escríbenos dentro de los 14 días siguientes a la entrega y lo solucionamos sin coste.",
       contact: "¿Dudas con tu pedido? Escríbenos a",
     },
+    delfin: {
+      lookbook: "Llévala a donde vayas. Yo la llevo al súper.",
+      directo: "Así la llevamos en el Paral·lel 62.",
+      colecciones: "Camisetas a 24,90 €. Fundas a 19,90 €. Me lo apunto.",
+      productos: "Al carrito. Al carrito. Al carrito.",
+      musica: "Con «Dolphins and Earthquakes» de fondo se compra mejor.",
+      envio: "Se imprime bajo pedido y llega todo en un solo paquete.",
+    },
+    directo: {
+      etiqueta: "En directo",
+      titulo: "Así se lleva",
+      credito: "Fotos: @lanave.rec · Paral·lel 62, 24/10/2026",
+    },
+    caja: {
+      titulo: "¿Pasas por caja?",
+      texto: "El delfín ya ha llenado su carrito. El tuyo está en la tienda.",
+      boton: "Ir a la tienda",
+      cosas: "cosas en el carrito del delfín",
+    },
     footer: {
       rights: "No Flag Patriots. Productos impresos bajo demanda.",
       listen: "Escucha",
@@ -211,6 +230,25 @@ const dictionaries: Record<Locale, Dict> = {
         "Com que són productes personalitzats fets sota comanda, no s'accepten devolucions per canvi d'opinió ni per talla. Si la teva comanda arriba danyada, defectuosa o amb un error nostre, escriu-nos dins dels 14 dies següents a l'entrega i ho solucionem sense cost.",
       contact: "Dubtes amb la teva comanda? Escriu-nos a",
     },
+    delfin: {
+      lookbook: "Porta-la on vulguis. Jo la porto al súper.",
+      directo: "Així la portàvem al Paral·lel 62.",
+      colecciones: "Samarretes a 24,90 €. Fundes a 19,90 €. M'ho apunto.",
+      productos: "Al carro. Al carro. Al carro.",
+      musica: "Amb «Dolphins and Earthquakes» de fons es compra millor.",
+      envio: "S'imprimeix sota comanda i arriba tot en un sol paquet.",
+    },
+    directo: {
+      etiqueta: "En directe",
+      titulo: "Així es porta",
+      credito: "Fotos: @lanave.rec · Paral·lel 62, 24/10/2026",
+    },
+    caja: {
+      titulo: "Passes per caixa?",
+      texto: "El dofí ja ha omplert el seu carro. El teu és a la botiga.",
+      boton: "Anar a la botiga",
+      cosas: "coses al carro del dofí",
+    },
     footer: {
       rights: "No Flag Patriots. Productes impresos sota demanda.",
       listen: "Escolta",
@@ -327,6 +365,25 @@ const dictionaries: Record<Locale, Dict> = {
       returnsBody:
         "Since these are custom, made-to-order products, we don't accept returns for a change of mind or wrong size. If your order arrives damaged, defective, or with an error on our part, contact us within 14 days of delivery and we'll sort it out at no cost.",
       contact: "Questions about your order? Email us at",
+    },
+    delfin: {
+      lookbook: "Take it anywhere. I take mine to the supermarket.",
+      directo: "This is how we wore it at Paral·lel 62.",
+      colecciones: "Tees at €24.90. Cases at €19.90. Noted.",
+      productos: "In the cart. In the cart. In the cart.",
+      musica: "Shopping goes better with “Dolphins and Earthquakes” on.",
+      envio: "Printed on demand, and it all ships in one package.",
+    },
+    directo: {
+      etiqueta: "Live",
+      titulo: "How it's worn",
+      credito: "Photos: @lanave.rec · Paral·lel 62, 24/10/2026",
+    },
+    caja: {
+      titulo: "Checking out?",
+      texto: "The dolphin's cart is full. Yours is in the shop.",
+      boton: "Go to the shop",
+      cosas: "things in the dolphin's cart",
     },
     footer: {
       rights: "No Flag Patriots. Products printed on demand.",

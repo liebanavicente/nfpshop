@@ -48,7 +48,7 @@ export default function Lookbook() {
   }
 
   return (
-    <section aria-labelledby="lookbook-heading" className="px-4 py-16 sm:px-6 sm:py-20">
+    <section aria-labelledby="lookbook-heading" data-parada="lookbook" className="px-4 py-16 sm:px-6 sm:py-20">
       <div className="reveal-on-scroll relative mx-auto max-w-5xl">
         <div
           aria-hidden="true"
