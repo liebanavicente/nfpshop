@@ -9,6 +9,17 @@ import { useLocale } from "@/lib/i18n";
 // Debajo, una cinta que avanza una palabra por pulso con lo que importa al comprar.
 const VALORES = ["onDemand", "oneShipment", "securePay", "euShipping"];
 
+// El ojo está a la derecha del plano y el delfín del final, casi en el centro: el encuadre 4:5 viaja del uno
+// al otro mientras el ojo se convierte en el delfín (5,4 → 6,6 s del vídeo).
+const ENCUADRE = { ojo: 62, delfin: 55, desde: 5.4, hasta: 6.6 };
+
+function seguirEncuadre(video: HTMLVideoElement) {
+  const u = Math.min(Math.max((video.currentTime - ENCUADRE.desde) / (ENCUADRE.hasta - ENCUADRE.desde), 0), 1);
+  const suave = u * u * (3 - 2 * u);
+  video.style.objectPosition = `${ENCUADRE.ojo + (ENCUADRE.delfin - ENCUADRE.ojo) * suave}% center`;
+  if (!video.paused && !video.ended) requestAnimationFrame(() => seguirEncuadre(video));
+}
+
 type Estilo = React.CSSProperties & Record<`--${string}`, string | number>;
 
 export default function Hero() {
@@ -72,6 +83,8 @@ export default function Hero() {
               playsInline
               poster="/hero-fashion-poster.png"
               preload="auto"
+              onPlay={(e) => seguirEncuadre(e.currentTarget)}
+              onEnded={(e) => seguirEncuadre(e.currentTarget)}
               className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
             >
               <source src="/videos/nfp-eyes-in-dolphin.mp4" type="video/mp4" />
