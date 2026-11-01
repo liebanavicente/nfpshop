@@ -1,175 +1,112 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "@/lib/i18n";
 
-const iconProps = {
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  className: "h-5 w-5",
-  "aria-hidden": true,
-};
+// Portada de fanzine: el nombre en tiras de máquina de escribir pegadas una a una al tempo (187 BPM),
+// el vídeo de los ojos del delfín pasado por la fotocopiadora con tinta azul y el sello estampado encima.
+// Debajo, una cinta que avanza una palabra por pulso con lo que importa al comprar.
+const VALORES = ["onDemand", "oneShipment", "securePay", "euShipping"];
 
-const valueProps = [
-  {
-    key: "onDemand",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8" />
-      </svg>
-    ),
-  },
-  {
-    key: "oneShipment",
-    icon: (
-      <svg {...iconProps}>
-        <path d="M3 7l9-4 9 4-9 4-9-4z" />
-        <path d="M3 7v10l9 4 9-4V7M12 11v10" />
-      </svg>
-    ),
-  },
-  {
-    key: "securePay",
-    icon: (
-      <svg {...iconProps}>
-        <rect x="5" y="11" width="14" height="10" rx="2" />
-        <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-      </svg>
-    ),
-  },
-  {
-    key: "euShipping",
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" />
-      </svg>
-    ),
-  },
-];
-
-function syncMobileFocus(video: HTMLVideoElement) {
-  if (!window.matchMedia("(max-width: 639px)").matches) {
-    video.style.objectPosition = "50% center";
-    return;
-  }
-
-  const progress = Math.min(Math.max((video.currentTime - 2.8) / 1.7, 0), 1);
-  const eased = progress * progress * (3 - 2 * progress);
-  video.style.objectPosition = `${72 - 22 * eased}% center`;
-}
+type Estilo = React.CSSProperties & Record<`--${string}`, string | number>;
 
 export default function Hero() {
   const { t } = useLocale();
-  const [videoEnded, setVideoEnded] = useState(false);
+  const palabras = t("hero.titleLine1").replace(/\.$/, "").split(" ");
+  const n = palabras.length;
+  const cinta = VALORES.map((k) => t(`valueProps.${k}`));
 
   return (
-    <section className="pb-8">
-      <div className="hero-stage relative isolate overflow-hidden px-4 pb-14 pt-32 sm:px-6 sm:pb-16 sm:pt-40">
-        <video
-          aria-hidden="true"
-          autoPlay
-          muted
-          playsInline
-          poster="/hero-fashion-poster.png"
-          preload="auto"
-          onLoadedMetadata={(event) => syncMobileFocus(event.currentTarget)}
-          onTimeUpdate={(event) => syncMobileFocus(event.currentTarget)}
-          onEnded={() => setVideoEnded(true)}
-          onError={() => setVideoEnded(true)}
-          className={`hero-film absolute inset-0 -z-30 h-full w-full object-cover transition-opacity duration-700 ${
-            videoEnded ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <source src="/videos/nfp-eyes-in-dolphin.mp4" type="video/mp4" />
-        </video>
-        <div
-          aria-hidden="true"
-          className={`hero-finale absolute inset-0 -z-30 flex items-center justify-center transition-opacity duration-700 ${
-            videoEnded ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <div className="absolute h-[62%] w-[62%] rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.24)_0%,rgba(30,58,138,0.16)_45%,transparent_72%)] blur-3xl" />
-          <Image
-            src="/hero-dolphin-cart.png"
-            alt=""
-            width={1297}
-            height={1199}
-            priority
-            sizes="(min-width: 1024px) 700px, 86vw"
-            className={`relative h-auto w-[min(86vw,700px)] transition-transform duration-700 ease-out drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] ${
-              videoEnded ? "scale-100" : "scale-[1.7] sm:scale-100"
-            }`}
-          />
-        </div>
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-20 bg-[linear-gradient(0deg,rgba(3,6,12,0.9)_0%,rgba(3,7,16,0.7)_38%,rgba(3,7,16,0.12)_76%),linear-gradient(90deg,rgba(3,7,16,0.98)_0%,rgba(3,7,16,0.88)_32%,rgba(3,7,16,0.28)_60%,rgba(3,7,16,0.06)_100%)] sm:bg-[linear-gradient(90deg,rgba(3,7,16,0.98)_0%,rgba(3,7,16,0.9)_28%,rgba(3,7,16,0.4)_55%,rgba(3,7,16,0.04)_82%),linear-gradient(0deg,rgba(3,6,12,0.7)_0%,transparent_38%)]"
-        />
-        <div aria-hidden="true" className="grain absolute inset-0 -z-10 opacity-[0.07]" />
-
-        <div className="mx-auto grid min-h-[570px] max-w-6xl items-end gap-12 sm:min-h-[600px] lg:grid-cols-[1.05fr_1fr] lg:items-center lg:gap-10">
-          <div className="pb-2 text-center lg:pb-0 lg:text-left">
-            <h1
-              className="hero-in text-[clamp(2.1rem,10.5vw,2.6rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl lg:text-[clamp(3.2rem,4.6vw,4rem)]"
-              style={{ animationDelay: "80ms" }}
-            >
-              {/* Special Elite ships a single 400 weight — font-normal avoids a synthesized faux-bold. */}
-              <span className="font-[family-name:var(--font-display)] font-normal tracking-[-0.02em]">
-                {t("hero.titleLine1")}
+    <section className="relative pt-24 sm:pt-28">
+      <div className="mx-auto grid max-w-6xl items-center gap-14 px-4 pb-16 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:gap-6 lg:pb-20">
+        <div>
+          <p className="golpe etiqueta-maquina text-[var(--azul)]" style={{ "--n": 0 } as Estilo}>
+            {t("hero.eyebrow")}
+          </p>
+          <h1 className="titular mt-5 flex flex-col items-start gap-[0.12em]">
+            {palabras.map((p, i) => (
+              <span
+                key={p + i}
+                className="golpe tira"
+                style={{ "--n": i + 1, "--hasta": `rotate(${[-1.5, 1, -0.6][i % 3]}deg)`, marginLeft: `${[0, 0.45, 0.15][i % 3]}em` } as Estilo}
+              >
+                {p}
               </span>
-              <br />
-              <span className="text-neutral-400">{t("hero.titleLine2")}</span>
-            </h1>
-
-            <p
-              className="hero-in mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-neutral-300 sm:text-xl lg:mx-0 lg:max-w-xl"
-              style={{ animationDelay: "160ms" }}
+            ))}
+            <span
+              className="golpe tira tira-azul mt-[0.2em] text-[0.4em]"
+              style={{ "--n": n + 1, "--hasta": "rotate(1.5deg)" } as Estilo}
             >
-              {t("hero.subtitle")}
-            </p>
+              {t("hero.titleLine2").replace(/\.$/, "")}
+            </span>
+          </h1>
 
-            <div
-              className="hero-in mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-7 lg:justify-start"
-              style={{ animationDelay: "240ms" }}
+          <p className="golpe mt-8 max-w-md text-base leading-relaxed sm:text-lg" style={{ "--n": n + 2, "--desde": "translateY(6px)" } as Estilo}>
+            {t("hero.subtitle")}
+          </p>
+
+          <div className="golpe mt-9 flex flex-wrap items-center gap-x-8 gap-y-5" style={{ "--n": n + 3, "--desde": "translateY(6px)" } as Estilo}>
+            <Link href="/tienda" className="boton-tira text-base">
+              {t("hero.ctaPrimary")} <span aria-hidden="true">→</span>
+            </Link>
+            <a
+              href="#colecciones"
+              className="font-[family-name:var(--font-display)] uppercase tracking-wider underline decoration-2 underline-offset-[6px] hover:text-[var(--azul)]"
             >
-              <Link
-                href="/tienda"
-                className="rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-[box-shadow,transform] duration-200 hover:shadow-[0_0_32px_rgba(125,211,252,0.5)] active:scale-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300"
-              >
-                {t("hero.ctaPrimary")}
-              </Link>
-              <a
-                href="#colecciones"
-                className="group inline-flex items-center gap-1 text-sm font-medium text-sky-300 transition-colors hover:text-sky-200"
-              >
-                {t("hero.ctaSecondary")}
-                <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
-                  ›
-                </span>
-              </a>
-            </div>
+              {t("hero.ctaSecondary")}
+            </a>
           </div>
+        </div>
 
-          <div aria-hidden="true" className="hidden lg:block" />
+        {/* el vídeo de la marca, fotocopiado y pegado con celo */}
+        <div className="relative mx-auto w-[86%] max-w-[500px] lg:w-full">
+          <div
+            className="golpe celo xerox aspect-[4/5] shadow-[10px_12px_0_var(--tinta)]"
+            style={{ "--n": 2, "--hasta": "rotate(2deg)", "--desde": "rotate(-6deg) scale(1.15)" } as Estilo}
+          >
+            <video
+              aria-hidden="true"
+              autoPlay
+              muted
+              playsInline
+              poster="/hero-fashion-poster.png"
+              preload="auto"
+              className="absolute inset-0 h-full w-full object-cover object-[62%_center]"
+            >
+              <source src="/videos/nfp-eyes-in-dolphin.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <Image
+            src="/products/logo1-black-ink.png"
+            alt=""
+            width={882}
+            height={885}
+            priority
+            className="estampa sello-tinta absolute -bottom-10 -left-8 w-[38%] sm:-left-14"
+            style={{ "--n": n + 2, "--giro": "-14deg" } as Estilo}
+          />
+          <p
+            className="golpe tira tira-papel absolute -right-3 top-6 text-sm sm:-right-6 sm:text-base"
+            style={{ "--n": n + 3, "--hasta": "rotate(4deg)" } as Estilo}
+          >
+            Dolphins &amp; Earthquakes
+          </p>
         </div>
       </div>
 
-      <ul className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 px-4 sm:px-6 md:grid-cols-4 lg:mt-10">
-        {valueProps.map(({ key, icon }) => (
-          <li key={key} className="punk-card glass p-5">
-            <span className="text-sky-300">{icon}</span>
-            <p className="mt-3 text-sm font-bold uppercase text-white">{t(`valueProps.${key}`)}</p>
-            <p className="mt-1 text-sm leading-snug text-neutral-400">{t(`valueProps.${key}Body`)}</p>
-          </li>
-        ))}
-      </ul>
+      <div className="cinta-ritmo -rotate-1">
+        <p className="sr-only">{cinta.join(" · ")}</p>
+        <div aria-hidden="true">
+          {[0, 1].flatMap((r) =>
+            [...cinta, ...cinta].map((c, i) => (
+              <span key={`${r}-${i}`}>
+                {c} <i>✕</i>
+              </span>
+            )),
+          )}
+        </div>
+      </div>
     </section>
   );
 }

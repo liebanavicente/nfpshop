@@ -301,7 +301,7 @@ body {
   display: block;
   width: 100%;
   height: auto;
-  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.55));
+  filter: drop-shadow(4px 5px 0 rgba(21, 19, 17, 0.35));
   transition: transform 0.25s;
 }
 .carrito-viajero-cuenta {
@@ -376,9 +376,9 @@ body {
 .directo-foto {
   position: relative;
   margin: 0;
-  padding: 8px 8px 8px;
-  background: #f4efe4;
-  box-shadow: 0 18px 30px -16px rgba(0, 0, 0, 0.7);
+  padding: 10px 10px 34px;
+  background: #fbf8f1;
+  box-shadow: 6px 7px 0 rgba(21, 19, 17, 0.85);
 }
 .directo-foto::before {
   content: "";
@@ -394,5 +394,262 @@ body {
 .caja-aparcamiento {
   width: min(240px, 60vw);
   height: 14px;
-  border-bottom: 3px dashed rgba(125, 211, 252, 0.45);
+  border-bottom: 3px dashed var(--tinta);
+}
+
+/* =====================================================================
+   «Fotocopia»: la portada como un fanzine. Papel, negro y una sola tinta
+   (el azul del disco). Todo cae al tempo del anuncio de la web (187 BPM).
+   Prohibido: cristal, degradados, fundidos, desenfoques, partículas, brillos.
+   ===================================================================== */
+:root {
+  --papel: #efe9dc;
+  --papel-2: #e4dccb;
+  --tinta: #151311;
+  --azul: #1b5a86;
+  --azul-hondo: #0d2f49;
+  --celo: rgba(226, 214, 170, 0.78);
+  --pulso: 321ms; /* 60 / 187 BPM */
+}
+
+.fotocopia {
+  position: relative;
+  isolation: isolate;
+  background: var(--papel);
+  color: var(--tinta);
+  overflow-x: clip;
+}
+/* grano de papel fotocopiado, encima de todo pero sin bloquear nada */
+.fotocopia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: multiply;
+  opacity: 0.22;
+}
+
+/* en una capa de componentes para que las utilidades de Tailwind (tamaños, márgenes) puedan ajustarlas */
+@layer components {
+/* tira de máquina de escribir: el texto recortado y pegado */
+.tira {
+  display: inline-block;
+  padding: 0.06em 0.22em 0.02em;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.tira-papel {
+  background: var(--papel);
+  color: var(--tinta);
+  box-shadow: 0 0 0 2px var(--tinta);
+}
+.tira-azul {
+  background: var(--azul);
+  color: var(--papel);
+}
+.titular {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 0.95;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 9vw, 7.5rem);
+  letter-spacing: -0.02em;
+}
+.etiqueta-maquina {
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* botón: una tira negra que se hunde como una tecla */
+.boton-tira {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.85em 1.4em 0.75em;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  box-shadow: 5px 5px 0 var(--azul);
+  transition: transform 90ms steps(2), box-shadow 90ms steps(2);
+}
+.boton-tira:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 var(--azul);
+}
+.boton-tira:active {
+  transform: translate(5px, 5px);
+  box-shadow: 0 0 0 var(--azul);
+}
+.boton-tira:focus-visible,
+.fotocopia a:focus-visible,
+.fotocopia button:focus-visible {
+  outline: 3px solid var(--azul);
+  outline-offset: 4px;
+}
+
+}
+
+/* celo en las esquinas */
+.celo {
+  position: relative;
+}
+.celo::before,
+.celo::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  width: 92px;
+  height: 26px;
+  background: var(--celo);
+  pointer-events: none;
+}
+.celo::before {
+  top: -12px;
+  left: -26px;
+  transform: rotate(-32deg);
+}
+.celo::after {
+  right: -26px;
+  bottom: -10px;
+  transform: rotate(-30deg);
+}
+
+/* foto pasada por la fotocopiadora con tinta azul: los negros salen azules y el blanco es papel
+   (filtro SVG #tinta-azul, definido en page.tsx; funciona igual con imágenes y con vídeo) */
+.xerox {
+  overflow: hidden;
+  background: var(--papel);
+}
+.xerox img,
+.xerox video {
+  filter: url(#tinta-azul);
+}
+.xerox::after,
+.xerox-negro::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 50%, rgba(21, 19, 17, 0.3) 34%, transparent 36%) 0 0 / 4px 4px;
+  mix-blend-mode: multiply;
+}
+.xerox-negro img,
+.xerox-negro video {
+  filter: grayscale(1) contrast(1.6) brightness(1.05);
+}
+
+/* sello estampado de verdad */
+.sello-tinta {
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+/* borde de papel rasgado entre bloques */
+.rasgado-arriba {
+  -webkit-mask: linear-gradient(#000 0 0) 0 14px / 100% 100% no-repeat,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / 28px 14px repeat-x;
+  mask: linear-gradient(#000 0 0) 0 14px / 100% 100% no-repeat,
+    conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 0 0 / 28px 14px repeat-x;
+}
+.rasgado-abajo {
+  -webkit-mask: linear-gradient(#000 0 0) 0 -14px / 100% 100% no-repeat,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / 22px 12px repeat-x;
+  mask: linear-gradient(#000 0 0) 0 -14px / 100% 100% no-repeat,
+    conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / 22px 12px repeat-x;
+}
+
+/* cinta que avanza una palabra por pulso (pasos, sin deslizar suave) */
+.cinta-ritmo {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+.cinta-ritmo > div {
+  display: inline-flex;
+  animation: cinta-pasos calc(var(--pulso) * 32) steps(32) infinite;
+}
+.cinta-ritmo span {
+  padding: 0.55em 1.1em;
+  font-size: clamp(1rem, 2.2vw, 1.5rem);
+}
+.cinta-ritmo i {
+  font-style: normal;
+  color: #7fb4d6;
+}
+@keyframes cinta-pasos {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* entrada «a golpe»: la pieza aparece de una vez y se asienta en un pulso (ni fundido ni rebote) */
+@keyframes golpe {
+  0% {
+    opacity: 0;
+    transform: var(--desde, rotate(-3deg) scale(1.12));
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: var(--hasta, none);
+  }
+}
+.golpe {
+  animation: golpe calc(var(--pulso) * 0.4) cubic-bezier(0.2, 0.9, 0.3, 1) both;
+  animation-delay: calc(var(--pulso) * var(--n, 0));
+}
+@keyframes estampar {
+  0% {
+    opacity: 0;
+    transform: scale(1.9) rotate(var(--giro, -12deg));
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1) rotate(var(--giro, -12deg));
+  }
+}
+.estampa {
+  animation: estampar calc(var(--pulso) * 0.25) cubic-bezier(0.5, 0, 1, 1) both;
+  animation-delay: calc(var(--pulso) * var(--n, 0));
+}
+/* en la portada, las piezas que entran al hacer scroll caen a golpe en vez de fundirse */
+.fotocopia .reveal-on-scroll {
+  animation: none;
+}
+@supports (animation-timeline: view()) {
+  .fotocopia .reveal-on-scroll {
+    animation: golpe linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 45%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .golpe,
+  .estampa,
+  .fotocopia .reveal-on-scroll,
+  .cinta-ritmo > div {
+    animation: none !important;
+    opacity: 1 !important;
+  }
 }

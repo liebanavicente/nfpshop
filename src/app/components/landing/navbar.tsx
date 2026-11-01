@@ -8,7 +8,7 @@ import { useCart } from "@/lib/cart";
 import { OFFICIAL_SITE } from "@/lib/band";
 
 const focusRing =
-  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300";
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7fb4d6]";
 
 function useScrolled(threshold = 12) {
   const [scrolled, setScrolled] = useState(false);
@@ -59,14 +59,14 @@ function LanguageMenu() {
         aria-haspopup="menu"
         aria-expanded={open}
         aria-label={t("nav.idioma")}
-        className={`flex h-9 items-center gap-1.5 rounded-full px-3 text-[13px] font-medium text-neutral-300 transition-colors duration-200 hover:bg-white/10 hover:text-white ${focusRing}`}
+        className={`flex h-9 items-center gap-1.5 px-3 font-[family-name:var(--font-display)] text-[13px] text-[#d9d1c1] transition-colors duration-100 hover:bg-[var(--papel)] hover:text-[var(--tinta)] ${focusRing}`}
       >
         <GlobeIcon />
         {locale.toUpperCase()}
       </button>
       <div
         role="menu"
-        className={`glass-strong absolute right-0 top-full mt-2 w-40 origin-top-right rounded-2xl p-1.5 transition-[opacity,transform,visibility] duration-150 ease-out ${
+        className={`absolute right-0 top-full mt-2 w-40 origin-top-right border-2 border-[var(--papel)] bg-[var(--tinta)] p-1.5 transition-[opacity,transform,visibility] duration-100 ease-out ${
           open ? "visible scale-100 opacity-100" : "invisible scale-95 opacity-0"
         }`}
       >
@@ -80,10 +80,10 @@ function LanguageMenu() {
               setLocale(id);
               setOpen(false);
             }}
-            className="flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm text-neutral-200 transition-colors hover:bg-white/10"
+            className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-[#d9d1c1] transition-colors hover:bg-[var(--papel)] hover:text-[var(--tinta)]"
           >
             {name}
-            {locale === id && <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-sky-300" />}
+            {locale === id && <span aria-hidden="true" className="h-1.5 w-1.5 bg-[#7fb4d6]" />}
           </button>
         ))}
       </div>
@@ -98,14 +98,14 @@ function CartLink() {
     <Link
       href="/carrito"
       aria-label={t("nav.carrito")}
-      className={`relative flex h-9 w-9 items-center justify-center rounded-full text-neutral-200 transition-colors duration-200 hover:bg-white/10 hover:text-white ${focusRing}`}
+      className={`relative flex h-9 w-9 items-center justify-center text-[#d9d1c1] transition-colors duration-100 hover:bg-[var(--papel)] hover:text-[var(--tinta)] ${focusRing}`}
     >
       <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
         <path d="M6 7h12l-1 13H7L6 7z" strokeLinejoin="round" />
         <path d="M9 7a3 3 0 0 1 6 0" strokeLinecap="round" />
       </svg>
       {totalCount > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-sky-300 px-1 text-[10px] font-bold text-black">
+        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center bg-[#7fb4d6] px-1 text-[10px] font-bold text-black">
           {totalCount}
         </span>
       )}
@@ -128,7 +128,7 @@ function NavLinks({ links }: { links: NavItem[] }) {
     <ul className="relative hidden items-center lg:flex" onMouseLeave={() => setVisible(false)}>
       <span
         aria-hidden="true"
-        className={`absolute inset-y-0 left-0 rounded-full bg-white/10 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`absolute inset-y-0 left-0 bg-[var(--papel)] ease-[cubic-bezier(0.22,1,0.36,1)] ${
           pos ? "transition-[transform,width,opacity] duration-300" : ""
         }`}
         style={{
@@ -146,7 +146,7 @@ function NavLinks({ links }: { links: NavItem[] }) {
               setPos({ left: e.currentTarget.offsetLeft, width: e.currentTarget.offsetWidth });
               setVisible(true);
             }}
-            className={`relative block whitespace-nowrap rounded-full px-3.5 py-2 text-[13px] font-medium text-neutral-300 transition-colors duration-200 hover:text-white ${focusRing}`}
+            className={`relative block whitespace-nowrap px-3.5 py-2 font-[family-name:var(--font-display)] text-[13px] uppercase tracking-wide text-[#d9d1c1] transition-colors duration-100 hover:text-[var(--tinta)] ${focusRing}`}
           >
             {link.label}
             {link.external && <span aria-hidden="true"> ↗</span>}
@@ -173,16 +173,17 @@ export default function Navbar() {
   const solid = scrolled || open;
 
   return (
+    // Una tira de tinta negra pegada arriba: funciona igual sobre el papel de la portada y sobre la tienda.
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4">
       <div
-        className={`mx-auto max-w-6xl rounded-2xl transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${
-          solid ? "glass-strong" : "border border-transparent"
+        className={`mx-auto max-w-6xl bg-[var(--tinta)] text-[var(--papel)] transition-shadow duration-150 ${
+          solid ? "shadow-[6px_6px_0_var(--azul)]" : "shadow-[3px_3px_0_var(--azul)]"
         }`}
       >
         <nav className="flex h-14 items-center justify-between pl-4 pr-2 sm:pl-5">
-          <Link href="/" className={`flex items-center gap-2.5 rounded-full ${focusRing}`}>
+          <Link href="/" className={`flex items-center gap-2.5 ${focusRing}`}>
             <Image src="/products/logo1-white-ink.png" alt="" width={28} height={28} className="h-7 w-7" />
-            <span className="font-[family-name:var(--font-display)] text-[15px] text-white">
+            <span className="font-[family-name:var(--font-display)] text-[15px] uppercase tracking-wide text-[var(--papel)]">
               No Flag Patriots
             </span>
           </Link>
@@ -196,7 +197,7 @@ export default function Navbar() {
             <CartLink />
             <Link
               href="/tienda"
-              className={`ml-1 hidden rounded-full bg-white px-4 py-2 text-[13px] font-semibold text-black transition-shadow duration-200 hover:shadow-[0_0_24px_rgba(125,211,252,0.5)] md:inline-block ${focusRing}`}
+              className={`ml-1 hidden bg-[var(--papel)] px-4 py-2 font-[family-name:var(--font-display)] text-[13px] uppercase tracking-wider text-[var(--tinta)] transition-colors duration-100 hover:bg-[#7fb4d6] md:inline-block ${focusRing}`}
             >
               {t("nav.tienda")}
             </Link>
@@ -205,7 +206,7 @@ export default function Navbar() {
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label={open ? t("nav.cerrarMenu") : t("nav.abrirMenu")}
-              className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-white/10 lg:hidden ${focusRing}`}
+              className={`relative flex h-9 w-9 items-center justify-center transition-colors hover:bg-white/10 lg:hidden ${focusRing}`}
             >
               <span
                 className={`absolute h-[1.5px] w-4 bg-white transition-transform duration-300 ${open ? "rotate-45" : "-translate-y-[3.5px]"}`}
@@ -223,14 +224,14 @@ export default function Navbar() {
           }`}
         >
           <div className="overflow-hidden">
-            <ul className="border-t border-white/10 px-4 pt-2">
+            <ul className="border-t-2 border-dashed border-white/20 px-4 pt-2">
               {links.map((link) => (
                 <li key={link.href}>
                   <a
                     href={link.href}
                     {...externalProps(link)}
                     onClick={() => setOpen(false)}
-                    className="block py-3 text-lg font-medium text-white"
+                    className="block py-3 font-[family-name:var(--font-display)] text-xl uppercase text-[var(--papel)]"
                   >
                     {link.label}
                     {link.external && <span aria-hidden="true" className="text-neutral-400"> ↗</span>}
@@ -240,7 +241,7 @@ export default function Navbar() {
             </ul>
             <div className="flex flex-col gap-3 px-4 pb-4 pt-3">
               <div
-                className="grid grid-cols-3 gap-1 rounded-full border border-white/10 bg-white/5 p-1"
+                className="grid grid-cols-3 gap-1 border-2 border-white/20 p-1"
                 role="radiogroup"
                 aria-label={t("nav.idioma")}
               >
@@ -251,8 +252,8 @@ export default function Navbar() {
                     role="radio"
                     aria-checked={locale === id}
                     onClick={() => setLocale(id)}
-                    className={`rounded-full py-1.5 text-sm transition-colors ${
-                      locale === id ? "bg-white text-black" : "text-neutral-300"
+                    className={`py-1.5 text-sm transition-colors ${
+                      locale === id ? "bg-[var(--papel)] text-[var(--tinta)]" : "text-[#d9d1c1]"
                     }`}
                   >
                     {name}
@@ -262,7 +263,7 @@ export default function Navbar() {
               <Link
                 href="/tienda"
                 onClick={() => setOpen(false)}
-                className="rounded-full bg-white py-3 text-center text-sm font-semibold text-black"
+                className="bg-[var(--papel)] py-3 text-center font-[family-name:var(--font-display)] uppercase tracking-wider text-[var(--tinta)]"
               >
                 {t("nav.tienda")}
               </Link>

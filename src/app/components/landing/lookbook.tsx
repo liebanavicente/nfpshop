@@ -48,15 +48,10 @@ export default function Lookbook() {
   }
 
   return (
-    <section aria-labelledby="lookbook-heading" data-parada="lookbook" className="px-4 py-16 sm:px-6 sm:py-20">
-      <div className="reveal-on-scroll relative mx-auto max-w-5xl">
-        <div
-          aria-hidden="true"
-          className="absolute -inset-6 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22)_0%,rgba(30,58,138,0.18)_45%,transparent_72%)] blur-2xl"
-        />
-
-        <div className="punk-card glass relative overflow-hidden p-1.5 sm:p-2">
-          <div className="relative aspect-video overflow-hidden bg-neutral-950">
+    <section aria-labelledby="lookbook-heading" data-parada="lookbook" className="px-4 py-20 sm:px-6 sm:py-28">
+      <div className="reveal-on-scroll relative mx-auto max-w-5xl" style={{ "--hasta": "rotate(-1deg)" } as React.CSSProperties}>
+        <div className="celo relative bg-[var(--tinta)] p-2 shadow-[12px_12px_0_var(--azul)] sm:p-3">
+          <div className="relative aspect-video overflow-hidden bg-black">
             <video
               ref={videoRef}
               src="/videos/nfpcommercial.mp4"
@@ -71,22 +66,20 @@ export default function Lookbook() {
               className="h-full w-full object-cover"
             />
 
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-
             <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-4 sm:p-7">
               <div className="min-w-0">
-                <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-sky-300 sm:text-xs">
+                <p className="tira tira-azul text-[11px] tracking-[0.18em] sm:text-xs">
                   {t("lookbook.eyebrow")}
                 </p>
                 <h2
                   id="lookbook-heading"
-                  className="mt-1.5 font-[family-name:var(--font-display)] text-xl uppercase tracking-wide text-white sm:mt-2 sm:text-3xl"
+                  className="tira mt-1.5 block w-fit text-xl sm:mt-2 sm:text-4xl"
                 >
                   {t("lookbook.heading")}
                 </h2>
                 <Link
                   href="/tienda"
-                  className="group mt-3 hidden items-center gap-1 text-sm font-medium text-white/90 transition-colors hover:text-sky-200 sm:inline-flex"
+                  className="tira tira-papel group mt-3 hidden items-center gap-1 text-sm sm:inline-flex"
                 >
                   {t("lookbook.cta")}
                   <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-0.5">
@@ -99,7 +92,7 @@ export default function Lookbook() {
                 type="button"
                 onClick={toggle}
                 aria-label={playing ? t("lookbook.pause") : t("lookbook.play")}
-                className="glass-strong grid h-10 w-10 shrink-0 place-items-center rounded-full text-white transition-transform duration-200 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-300 sm:h-11 sm:w-11"
+                className="grid h-10 w-10 shrink-0 place-items-center bg-[var(--papel)] text-[var(--tinta)] shadow-[3px_3px_0_var(--tinta)] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none sm:h-11 sm:w-11"
               >
                 {playing ? (
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">

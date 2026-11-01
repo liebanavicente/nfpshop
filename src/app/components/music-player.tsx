@@ -187,7 +187,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
     <MusicContext.Provider value={{ isPlaying, playFromUser }}>
       {children}
       {/* Room to scroll the page's last content out from under the dock. */}
-      {!dismissed && <div aria-hidden="true" className={minimized ? "h-20" : "h-36"} />}
+      {!dismissed && <div aria-hidden="true" className={`bg-[var(--tinta)] ${minimized ? "h-20" : "h-36"}`} />}
 
       <div
         ref={dockRef}
