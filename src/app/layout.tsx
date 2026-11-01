@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { IBM_Plex_Mono, Special_Elite } from "next/font/google";
 import Navbar from "@/app/components/landing/navbar";
 import Footer from "@/app/components/landing/footer";
-import AmbientBackground from "@/app/components/ambient-background";
 import { LocaleProvider } from "@/lib/i18n";
 import { CartProvider } from "@/lib/cart";
 import { MusicProvider } from "@/app/components/music-player";
@@ -51,8 +50,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="es"
       className={`${bodyMono.variable} ${specialElite.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">
-        <AmbientBackground />
+      <body className="min-h-full flex flex-col bg-[var(--papel)] text-[var(--tinta)]">
         <LocaleProvider>
           <CartProvider>
             <MusicProvider>

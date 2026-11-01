@@ -12,6 +12,9 @@ function formatPrice(cents: number, currency: string) {
   }).format(cents / 100);
 }
 
+// El catálogo como la mesa de merch de la portada: fichas pinchadas, un poco torcidas, con el precio en una tira.
+const GIROS = [-1.2, 0.8, -0.5, 1.1, -0.9, 0.6];
+
 function Section({
   id,
   title,
@@ -24,31 +27,29 @@ function Section({
   const { t } = useLocale();
   const items = designs.filter((d) => d.category === category);
   return (
-    <section id={id} className="mb-16 scroll-mt-24">
-      <h2 className="mb-6 font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
-        {title}
+    <section id={id} className="mb-24 scroll-mt-28">
+      <h2 className="titular text-[clamp(2rem,5.5vw,3.75rem)]">
+        <span className="tira tira-azul">{title}</span>
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {items.map((design) => {
+      <div className="mt-12 grid grid-cols-1 gap-x-8 gap-y-14 sm:grid-cols-2 md:grid-cols-3">
+        {items.map((design, i) => {
           const fromPrice = design.variants[0];
           return (
             <Link
               key={design.slug}
               href={`/producto/${design.slug}`}
-              className="glass glass-hover overflow-hidden rounded-3xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300"
+              style={{ rotate: `${GIROS[i % GIROS.length]}deg` }}
+              className="group relative block bg-[#fbf8f1] p-2.5 pb-5 shadow-[8px_8px_0_var(--tinta)] transition-transform duration-150 hover:-translate-y-1 focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-4 focus-visible:outline-[var(--azul)]"
             >
-              <div className="p-2 pb-0">
-                <div className="overflow-hidden rounded-2xl">
-                  <ProductImage design={design} variant={fromPrice} />
-                </div>
+              <span aria-hidden="true" className="absolute -top-2 left-1/2 z-10 h-4 w-4 -translate-x-1/2 rounded-full bg-[var(--azul)] shadow-[1px_2px_0_var(--tinta)]" />
+              <ProductImage design={design} variant={fromPrice} />
+              <div className="px-1.5 pt-4">
+                <h3 className="font-[family-name:var(--font-display)] text-lg uppercase leading-tight">{design.name}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#4a443d]">{design.description}</p>
               </div>
-              <div className="p-4 pt-3">
-                <h3 className="font-semibold text-white">{design.name}</h3>
-                <p className="mt-1 text-sm text-neutral-400">{design.description}</p>
-                <p className="mt-3 font-medium text-sky-300">
-                  {t("tienda.desde")} {formatPrice(fromPrice.priceCents, fromPrice.currency)}
-                </p>
-              </div>
+              <p className="tira tira-azul absolute -right-3 top-[58%] rotate-[-4deg] text-sm sm:text-base">
+                {t("tienda.desde")} {formatPrice(fromPrice.priceCents, fromPrice.currency)}
+              </p>
             </Link>
           );
         })}
@@ -60,13 +61,15 @@ function Section({
 export default function Tienda() {
   const { t } = useLocale();
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-6">
-      <h1 className="mb-2 font-[family-name:var(--font-display)] text-3xl uppercase tracking-wide text-white">
-        {t("tienda.heading")}
-      </h1>
-      <p className="mb-12 text-neutral-400">{t("tienda.subheading")}</p>
-      <Section id="camisetas" title={t("tienda.camisetas")} category="camiseta" />
-      <Section id="fundas" title={t("tienda.fundas")} category="funda-iphone" />
+    <main className="fotocopia flex-1">
+      <div className="mx-auto max-w-5xl px-4 pb-16 pt-32 sm:px-6">
+        <h1 className="titular">
+          <span className="tira">{t("tienda.heading")}</span>
+        </h1>
+        <p className="mb-16 mt-6 max-w-lg text-lg">{t("tienda.subheading")}</p>
+        <Section id="camisetas" title={t("tienda.camisetas")} category="camiseta" />
+        <Section id="fundas" title={t("tienda.fundas")} category="funda-iphone" />
+      </div>
     </main>
   );
 }

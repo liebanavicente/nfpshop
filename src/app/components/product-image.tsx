@@ -70,7 +70,7 @@ export default function ProductImage({
       {!canHover && (
         <span
           aria-hidden="true"
-          className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/60 text-xs text-white backdrop-blur-sm"
+          className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center bg-[var(--tinta)] text-xs text-[var(--papel)]"
         >
           ⇄
         </span>

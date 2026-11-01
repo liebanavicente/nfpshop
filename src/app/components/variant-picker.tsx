@@ -28,26 +28,26 @@ export default function VariantPicker({ design }: { design: Design }) {
 
   return (
     <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-2 md:gap-8">
-      <div className="glass rounded-3xl p-2">
-        <div className="overflow-hidden rounded-2xl">
-          <ProductImage design={design} variant={variant} />
-        </div>
+      {/* la pieza pinchada en el papel, como en la mesa de merch */}
+      <div className="relative rotate-[-1.2deg] bg-[#fbf8f1] p-3 shadow-[10px_10px_0_var(--tinta)]">
+        <span aria-hidden="true" className="absolute -top-2 left-1/2 z-10 h-5 w-5 -translate-x-1/2 rounded-full bg-[var(--azul)] shadow-[1px_2px_0_var(--tinta)]" />
+        <ProductImage design={design} variant={variant} />
       </div>
 
-      <div className="glass rounded-3xl p-6 sm:p-8 md:sticky md:top-28">
-        <h1 className="font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
-          {design.name}
+      <div className="ficha ficha-azul p-6 sm:p-8 md:sticky md:top-28">
+        <h1 className="titular text-[clamp(1.9rem,4vw,2.75rem)]">
+          <span className="tira">{design.name}</span>
         </h1>
-        <p className="mt-2 text-neutral-400">{design.description}</p>
-        <p className="mt-4 text-2xl font-semibold text-sky-300">
+        <p className="mt-5 leading-relaxed text-[#4a443d]">{design.description}</p>
+        <p className="tira tira-azul mt-5 rotate-[-2deg] text-2xl">
           {formatPrice(variant.priceCents, variant.currency)}
         </p>
 
-        <label className="mb-2 mt-6 block text-sm font-medium text-neutral-300">
+        <label className="etiqueta-maquina mb-2 mt-8 block text-xs">
           {design.category === "camiseta" ? t("product.colorTalla") : t("product.modelo")}
         </label>
         <select
-          className="w-full rounded-xl border border-white/12 bg-white/5 px-4 py-3 text-white transition-colors focus:border-sky-300/60 focus:outline-none focus-visible:ring-4 focus-visible:ring-sky-300/25"
+          className="selector"
           value={variantId}
           onChange={(e) => {
             setVariantId(e.target.value);
@@ -55,35 +55,33 @@ export default function VariantPicker({ design }: { design: Design }) {
           }}
         >
           {design.variants.map((v) => (
-            <option key={v.id} value={v.id} className="bg-neutral-900">
+            <option key={v.id} value={v.id}>
               {v.label}
             </option>
           ))}
         </select>
 
-        <label className="mb-2 mt-6 block text-sm font-medium text-neutral-300">
+        <label className="etiqueta-maquina mb-2 mt-6 block text-xs">
           {t("product.cantidad")}
         </label>
-        <div className="inline-flex items-center gap-1 rounded-full border border-white/12 bg-white/5 p-1">
+        <div className="contador">
           <button
             type="button"
             onClick={() => {
               setQuantity((q) => Math.max(1, q - 1));
               setAdded(false);
             }}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
             aria-label="-"
           >
             −
           </button>
-          <span className="w-8 text-center text-white">{quantity}</span>
+          <span>{quantity}</span>
           <button
             type="button"
             onClick={() => {
               setQuantity((q) => Math.min(9, q + 1));
               setAdded(false);
             }}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
             aria-label="+"
           >
             +
@@ -93,15 +91,15 @@ export default function VariantPicker({ design }: { design: Design }) {
         <button
           type="button"
           onClick={handleAdd}
-          className="mt-8 w-full rounded-full bg-white py-3.5 font-[family-name:var(--font-display)] uppercase tracking-widest text-black transition-shadow duration-200 hover:shadow-[0_0_32px_rgba(125,211,252,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300"
+          className="boton-tira mt-9 w-full justify-center text-base"
         >
           {t("product.añadirCarrito")}
         </button>
 
         {added && (
-          <p className="mt-4 text-center text-sm text-sky-300">
+          <p className="mt-5 text-center font-[family-name:var(--font-display)] text-sm">
             {t("product.añadido")} —{" "}
-            <Link href="/carrito" className="nav-link">
+            <Link href="/carrito" className="underline decoration-2 underline-offset-4 hover:text-[var(--azul)]">
               {t("product.verCarrito")}
             </Link>
           </p>

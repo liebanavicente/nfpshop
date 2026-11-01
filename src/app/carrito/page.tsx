@@ -13,8 +13,7 @@ function formatPrice(cents: number, currency: string) {
   );
 }
 
-const primaryButton =
-  "rounded-full bg-white px-6 py-3.5 font-[family-name:var(--font-display)] uppercase tracking-widest text-black transition-shadow duration-200 hover:shadow-[0_0_32px_rgba(125,211,252,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300";
+const primaryButton = "boton-tira justify-center";
 
 export default function CarritoPage() {
   const { t } = useLocale();
@@ -30,14 +29,14 @@ export default function CarritoPage() {
 
   if (lines.length === 0) {
     return (
-      <main className="mx-auto w-full max-w-xl px-4 pb-20 pt-32">
-        <div className="glass rounded-3xl px-6 py-12 text-center">
-          <h1 className="mb-4 font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
-            {t("cart.heading")}
+      <main className="fotocopia flex-1">
+        <div className="mx-auto w-full max-w-xl px-4 pb-24 pt-36 text-center">
+          <h1 className="titular text-[clamp(2.2rem,7vw,4rem)]">
+            <span className="tira">{t("cart.heading")}</span>
           </h1>
-          <p className="text-neutral-400">{t("cart.empty")}</p>
-          <Link href="/tienda" className={`mt-8 inline-block ${primaryButton}`}>
-            {t("cart.seguirComprando")}
+          <p className="mt-6 text-lg">{t("cart.empty")}</p>
+          <Link href="/tienda" className={`mt-10 ${primaryButton}`}>
+            {t("cart.seguirComprando")} <span aria-hidden="true">→</span>
           </Link>
         </div>
       </main>
@@ -46,13 +45,13 @@ export default function CarritoPage() {
 
   if (checkingOut) {
     return (
-      <main className="mx-auto w-full max-w-2xl px-4 pb-20 pt-28">
-        <h1 className="mb-6 font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
-          {t("cart.heading")}
-        </h1>
-        {/* Stripe renders its own light card; the glass frame ties it into the page. */}
-        <div className="glass overflow-hidden rounded-3xl p-2">
-          <div className="overflow-hidden rounded-2xl">
+      <main className="fotocopia flex-1">
+        <div className="mx-auto w-full max-w-2xl px-4 pb-24 pt-32">
+          <h1 className="titular mb-10 text-[clamp(2.2rem,7vw,4rem)]">
+            <span className="tira">{t("cart.heading")}</span>
+          </h1>
+          {/* Stripe pinta su propia tarjeta clara: la ficha de papel con canto de tinta la integra en la página */}
+          <div className="ficha ficha-azul overflow-hidden p-2">
             <Checkout lines={lines} />
           </div>
         </div>
@@ -61,42 +60,41 @@ export default function CarritoPage() {
   }
 
   return (
-    <main className="mx-auto w-full max-w-5xl px-4 pb-20 pt-28 sm:px-6">
-      <h1 className="mb-8 font-[family-name:var(--font-display)] text-2xl uppercase tracking-wide text-white">
-        {t("cart.heading")}
+    <main className="fotocopia flex-1">
+      <div className="mx-auto w-full max-w-5xl px-4 pb-24 pt-32 sm:px-6">
+      <h1 className="titular mb-12 text-[clamp(2.2rem,7vw,4rem)]">
+        <span className="tira">{t("cart.heading")}</span>
       </h1>
 
       <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[1fr_340px]">
-        <div className="space-y-3">
+        <div className="space-y-5">
           {resolved.map(({ line, design, variant }) => (
             <div
               key={`${line.designSlug}-${line.variantId}`}
-              className="glass flex flex-wrap items-center gap-4 rounded-3xl p-3 sm:flex-nowrap sm:p-4"
+              className="ficha flex flex-wrap items-center gap-4 p-3 sm:flex-nowrap sm:p-4"
             >
-              <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-neutral-100">
+              <div className="relative h-20 w-20 shrink-0 overflow-hidden border-2 border-[var(--tinta)] bg-neutral-100">
                 <Image src={variant.imageUrl} alt={design.name} fill className="object-cover" />
               </div>
-              <div className="min-w-0 flex-1">
-                <p className="truncate font-medium text-white">{design.name}</p>
-                <p className="text-sm text-neutral-400">{variant.label}</p>
-                <p className="mt-1 text-sm text-sky-300">
+              <div className="min-w-0 flex-1 basis-[calc(100%-6rem)] sm:basis-auto">
+                <p className="truncate font-[family-name:var(--font-display)] uppercase">{design.name}</p>
+                <p className="text-sm text-[#4a443d]">{variant.label}</p>
+                <p className="mt-1 font-[family-name:var(--font-display)] text-[var(--azul)]">
                   {formatPrice(variant.priceCents, variant.currency)}
                 </p>
               </div>
-              <div className="inline-flex items-center gap-1 rounded-full border border-white/12 bg-white/5 p-1">
+              <div className="contador">
                 <button
                   type="button"
                   onClick={() => setQuantity(line.designSlug, line.variantId, line.quantity - 1)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
                   aria-label="-"
                 >
                   −
                 </button>
-                <span className="w-6 text-center text-white">{line.quantity}</span>
+                <span>{line.quantity}</span>
                 <button
                   type="button"
                   onClick={() => setQuantity(line.designSlug, line.variantId, line.quantity + 1)}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
                   aria-label="+"
                 >
                   +
@@ -105,7 +103,7 @@ export default function CarritoPage() {
               <button
                 type="button"
                 onClick={() => removeItem(line.designSlug, line.variantId)}
-                className="nav-link text-sm text-neutral-400"
+                className="text-sm underline decoration-2 underline-offset-4 hover:text-[var(--azul)]"
               >
                 {t("cart.eliminar")}
               </button>
@@ -113,28 +111,29 @@ export default function CarritoPage() {
           ))}
         </div>
 
-        <aside className="glass rounded-3xl p-6 lg:sticky lg:top-28">
+        <aside className="ficha ficha-azul p-6 lg:sticky lg:top-28">
           <div className="flex items-center justify-between">
-            <span className="text-neutral-300">{t("cart.subtotal")}</span>
-            <span className="text-2xl font-semibold text-white">
+            <span className="etiqueta-maquina text-xs">{t("cart.subtotal")}</span>
+            <span className="font-[family-name:var(--font-display)] text-3xl">
               {formatPrice(subtotalCents, currency)}
             </span>
           </div>
-          <p className="mt-3 text-sm text-neutral-400">{t("cart.envioNota")}</p>
+          <p className="mt-4 border-t-2 border-dashed border-[var(--tinta)] pt-4 text-sm text-[#4a443d]">{t("cart.envioNota")}</p>
           <button
             type="button"
             onClick={() => setCheckingOut(true)}
-            className={`mt-6 w-full ${primaryButton}`}
+            className={`mt-7 w-full ${primaryButton}`}
           >
             {t("cart.finalizarCompra")}
           </button>
           <Link
             href="/tienda"
-            className="mt-4 block text-center text-sm text-neutral-400 transition-colors hover:text-white"
+            className="mt-5 block text-center text-sm underline decoration-2 underline-offset-4 hover:text-[var(--azul)]"
           >
             {t("cart.seguirComprando")}
           </Link>
         </aside>
+      </div>
       </div>
     </main>
   );

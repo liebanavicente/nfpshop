@@ -65,7 +65,7 @@ function Equalizer({ active }: { active: boolean }) {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="h-full w-[3px] origin-bottom rounded-full bg-sky-300"
+          className="h-full w-[3px] origin-bottom bg-[#7fb4d6]"
           style={{
             transform: active ? undefined : "scaleY(0.3)",
             animation: active ? `eq-bar 900ms ease-in-out ${i * 150}ms infinite alternate` : "none",
@@ -181,7 +181,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
   }
 
   const iconButton =
-    "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-neutral-300 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-sky-300";
+    "flex h-8 w-8 shrink-0 items-center justify-center text-[#d9d1c1] transition-colors hover:bg-[var(--papel)] hover:text-[var(--tinta)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#7fb4d6]";
 
   return (
     <MusicContext.Provider value={{ isPlaying, playFromUser }}>
@@ -194,15 +194,15 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
         role="region"
         aria-label={t("music.playerTitle")}
         // Kept mounted when closed so the embed (and its loaded state) survives a reopen.
-        className={`glass-strong fixed bottom-3 right-3 z-40 w-[calc(100%-1.5rem)] rounded-2xl transition-[opacity,transform,visibility] duration-300 sm:bottom-5 sm:right-5 sm:w-[360px] ${
+        className={`fixed bottom-3 right-3 z-40 w-[calc(100%-1.5rem)] bg-[var(--tinta)] shadow-[5px_5px_0_var(--azul)] transition-[opacity,transform,visibility] duration-300 sm:bottom-5 sm:right-5 sm:w-[360px] ${
           dismissed ? "invisible translate-y-4 opacity-0" : "visible translate-y-0 opacity-100"
         }`}
       >
         <div className="flex items-center gap-2 py-1.5 pl-3.5 pr-1.5">
           <Equalizer active={isPlaying} />
-          <p className="min-w-0 flex-1 truncate text-xs text-neutral-300">
-            <span className="text-neutral-400">{isPlaying ? t("player.nowPlaying") : t("player.paused")} · </span>
-            <span className="text-white">Dolphins and Earthquakes</span>
+          <p className="min-w-0 flex-1 truncate font-[family-name:var(--font-display)] text-xs text-[#d9d1c1]">
+            <span className="text-[#bdb5a6]">{isPlaying ? t("player.nowPlaying") : t("player.paused")} · </span>
+            <span className="text-[var(--papel)]">Dolphins and Earthquakes</span>
           </p>
           {minimized && (
             <button
@@ -255,7 +255,7 @@ export function MusicProvider({ children }: { children: React.ReactNode }) {
           }`}
         >
           <div className="overflow-hidden">
-            <div ref={hostRef} className="px-1.5 pb-1.5 [&_iframe]:block [&_iframe]:rounded-xl" />
+            <div ref={hostRef} className="px-1.5 pb-1.5 [&_iframe]:block" />
           </div>
         </div>
       </div>

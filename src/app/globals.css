@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  --background: #efe9dc;
+  --foreground: #151311;
 }
 
 @theme inline {
@@ -568,6 +568,56 @@ body {
     conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / 22px 12px repeat-x;
   mask: linear-gradient(#000 0 0) 0 -14px / 100% 100% no-repeat,
     conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 0 100% / 22px 12px repeat-x;
+}
+
+/* piezas de la tienda por dentro: fichas de papel con canto de tinta, contadores y selectores cuadrados */
+@layer components {
+  .ficha {
+    background: #fbf8f1;
+    border: 2px solid var(--tinta);
+    box-shadow: 8px 8px 0 var(--tinta);
+  }
+  .ficha-azul {
+    box-shadow: 8px 8px 0 var(--azul);
+  }
+  .contador {
+    display: inline-flex;
+    align-items: center;
+    border: 2px solid var(--tinta);
+    background: #fbf8f1;
+  }
+  .contador button {
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+  .contador button:hover {
+    background: var(--tinta);
+    color: var(--papel);
+  }
+  .contador span {
+    min-width: 2rem;
+    text-align: center;
+    font-family: var(--font-display);
+  }
+  .selector {
+    width: 100%;
+    appearance: none;
+    border: 2px solid var(--tinta);
+    border-radius: 0;
+    background: #fbf8f1 url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9'><path d='M1 1l6 6 6-6' fill='none' stroke='%23151311' stroke-width='2'/></svg>") no-repeat right 1rem center;
+    padding: 0.8rem 2.6rem 0.8rem 1rem;
+    color: var(--tinta);
+    font-family: var(--font-display);
+  }
+  .selector:focus-visible {
+    outline: 3px solid var(--azul);
+    outline-offset: 2px;
+  }
 }
 
 /* cinta que avanza una palabra por pulso (pasos, sin deslizar suave) */
