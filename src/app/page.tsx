@@ -7,6 +7,7 @@ import ShippingReturns from "@/app/components/landing/shipping-returns";
 import Directo from "@/app/components/landing/directo";
 import PasaPorCaja from "@/app/components/landing/pasa-por-caja";
 import CarritoViajero from "@/app/components/landing/carrito-viajero";
+import EdicionLimitada from "@/app/components/landing/edicion-limitada";
 
 // La portada va en papel («fotocopia», ver globals.css); el resto de la tienda mantiene su tema.
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
       <Hero />
       <Lookbook />
       <Directo />
+      <EdicionLimitada />
       <Collections />
       <ProductsPreview />
       <Music />

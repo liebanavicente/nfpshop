@@ -113,6 +113,13 @@ const dictionaries: Record<Locale, Dict> = {
       boton: "Ir a la tienda",
       cosas: "cosas en el carrito del delfín",
     },
+    edicion: {
+      etiqueta: "Edición limitada · Paral·lel 62",
+      titulo: "¿Quieres la del bolo?",
+      texto: "La camiseta del concierto con Not Available en el Paral·lel 62, con dibujo de Joel Abad. No está en la tienda online: escríbenos y te decimos cómo conseguirla.",
+      boton: "Escríbenos",
+      asunto: "Camiseta edición limitada Paral·lel 62",
+    },
     footer: {
       rights: "No Flag Patriots. Productos impresos bajo demanda.",
       listen: "Escucha",
@@ -125,7 +132,6 @@ const dictionaries: Record<Locale, Dict> = {
       camisetas: "Camisetas",
       fundas: "Fundas de iPhone",
       desde: "Desde",
-      edicion: "Edición limitada · Paral·lel 62",
     },
     product: {
       colorTalla: "Color y talla",
@@ -134,9 +140,6 @@ const dictionaries: Record<Locale, Dict> = {
       añadirCarrito: "Añadir al carrito",
       añadido: "Añadido al carrito",
       verCarrito: "Ver carrito",
-      quedan: "Quedan {n} en esta talla",
-      agotada: "agotada",
-      notaStock: "Edición limitada en stock: la enviamos nosotros desde Barcelona. Tienes 14 días para devolverla.",
     },
     checkoutSuccess: {
       thanks: "¡Gracias por tu compra!",
@@ -144,7 +147,6 @@ const dictionaries: Record<Locale, Dict> = {
       notFound: "Pedido no encontrado",
     },
     cart: {
-      agotada: "Alguna talla de tu carrito se ha agotado mientras comprabas. Revisa el carrito y vuelve a intentarlo.",
       heading: "Tu carrito",
       empty: "Tu carrito está vacío.",
       seguirComprando: "Seguir comprando",
@@ -254,6 +256,13 @@ const dictionaries: Record<Locale, Dict> = {
       boton: "Anar a la botiga",
       cosas: "coses al carro del dofí",
     },
+    edicion: {
+      etiqueta: "Edició limitada · Paral·lel 62",
+      titulo: "Vols la del concert?",
+      texto: "La samarreta del concert amb Not Available al Paral·lel 62, amb dibuix de Joel Abad. No és a la botiga online: escriu-nos i et diem com aconseguir-la.",
+      boton: "Escriu-nos",
+      asunto: "Samarreta edició limitada Paral·lel 62",
+    },
     footer: {
       rights: "No Flag Patriots. Productes impresos sota demanda.",
       listen: "Escolta",
@@ -266,7 +275,6 @@ const dictionaries: Record<Locale, Dict> = {
       camisetas: "Samarretes",
       fundas: "Fundes d'iPhone",
       desde: "Des de",
-      edicion: "Edició limitada · Paral·lel 62",
     },
     product: {
       colorTalla: "Color i talla",
@@ -275,9 +283,6 @@ const dictionaries: Record<Locale, Dict> = {
       añadirCarrito: "Afegeix a la cistella",
       añadido: "Afegit a la cistella",
       verCarrito: "Veure la cistella",
-      quedan: "En queden {n} d’aquesta talla",
-      agotada: "esgotada",
-      notaStock: "Edició limitada en estoc: l’enviem nosaltres des de Barcelona. Tens 14 dies per tornar-la.",
     },
     checkoutSuccess: {
       thanks: "Gràcies per la teva compra!",
@@ -285,7 +290,6 @@ const dictionaries: Record<Locale, Dict> = {
       notFound: "Comanda no trobada",
     },
     cart: {
-      agotada: "Alguna talla de la teva cistella s’ha esgotat mentre compraves. Revisa la cistella i torna-ho a provar.",
       heading: "La teva cistella",
       empty: "La teva cistella està buida.",
       seguirComprando: "Continua comprant",
@@ -395,6 +399,13 @@ const dictionaries: Record<Locale, Dict> = {
       boton: "Go to the shop",
       cosas: "things in the dolphin's cart",
     },
+    edicion: {
+      etiqueta: "Limited edition · Paral·lel 62",
+      titulo: "Want the gig shirt?",
+      texto: "The shirt from our show with Not Available at Paral·lel 62, drawn by Joel Abad. It isn’t in the online shop: email us and we’ll tell you how to get one.",
+      boton: "Email us",
+      asunto: "Limited edition shirt Paral·lel 62",
+    },
     footer: {
       rights: "No Flag Patriots. Products printed on demand.",
       listen: "Listen",
@@ -407,7 +418,6 @@ const dictionaries: Record<Locale, Dict> = {
       camisetas: "T-Shirts",
       fundas: "iPhone Cases",
       desde: "From",
-      edicion: "Limited edition · Paral·lel 62",
     },
     product: {
       colorTalla: "Color and size",
@@ -416,9 +426,6 @@ const dictionaries: Record<Locale, Dict> = {
       añadirCarrito: "Add to cart",
       añadido: "Added to cart",
       verCarrito: "View cart",
-      quedan: "{n} left in this size",
-      agotada: "sold out",
-      notaStock: "Limited edition in stock: we ship it ourselves from Barcelona. You have 14 days to return it.",
     },
     checkoutSuccess: {
       thanks: "Thanks for your order!",
@@ -426,7 +433,6 @@ const dictionaries: Record<Locale, Dict> = {
       notFound: "Order not found",
     },
     cart: {
-      agotada: "A size in your cart sold out while you were shopping. Check your cart and try again.",
       heading: "Your cart",
       empty: "Your cart is empty.",
       seguirComprando: "Continue shopping",
