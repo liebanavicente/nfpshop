@@ -1,4 +1,6 @@
-export type Category = "camiseta" | "funda-iphone";
+import { EDICION_P62 } from "@/lib/edicion-limitada";
+
+export type Category = "camiseta" | "funda-iphone" | "edicion-limitada";
 
 export interface Variant {
   id: string;
@@ -6,8 +8,8 @@ export interface Variant {
   priceCents: number;
   currency: string;
   imageUrl: string;
-  /** productUid real del catálogo de Gelato (verificado vía API). */
-  gelatoProductUid: string;
+  /** productUid real del catálogo de Gelato (verificado vía API). Sin él, la variante es de stock propio. */
+  gelatoProductUid?: string;
 }
 
 export interface Design {
@@ -16,6 +18,8 @@ export interface Design {
   description: string;
   category: Category;
   variants: Variant[];
+  /** Stock físico que envía la banda (no pasa por Gelato). */
+  stock?: boolean;
 }
 
 const TEE_SIZES = ["s", "m", "l", "xl"] as const;
@@ -64,7 +68,23 @@ function caseVariants(imageUrl: string): Variant[] {
   }));
 }
 
-export const designs: Design[] = [
+const edicionP62: Design = {
+  slug: EDICION_P62.slug,
+  name: "NFP × Not Available — Paral·lel 62",
+  description:
+    "Edición limitada del concierto con Not Available en el Paral·lel 62 (24/10/2026). Dibujo de Joel Abad en tinta azul sobre camiseta blanca.",
+  category: "edicion-limitada",
+  stock: true,
+  variants: EDICION_P62.tallas.map((talla) => ({
+    id: `white-${talla.toLowerCase()}`,
+    label: `Blanca / ${talla}`,
+    priceCents: EDICION_P62.precioCents,
+    currency: "eur",
+    imageUrl: "/products/edicion-p62-camiseta.jpg",
+  })),
+};
+
+const catalogo: Design[] = [
   {
     slug: "delfin-bandera",
     name: "Delfín y bandera",
@@ -137,6 +157,8 @@ export const designs: Design[] = [
     variants: caseVariants("/products/case-skate.jpg"),
   },
 ];
+
+export const designs: Design[] = EDICION_P62.activa ? [edicionP62, ...catalogo] : catalogo;
 
 export function getDesign(slug: string): Design | undefined {
   return designs.find((d) => d.slug === slug);

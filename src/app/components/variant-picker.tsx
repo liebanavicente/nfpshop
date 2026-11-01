@@ -13,13 +13,24 @@ function formatPrice(cents: number, currency: string) {
   );
 }
 
-export default function VariantPicker({ design }: { design: Design }) {
+export default function VariantPicker({
+  design,
+  existencias,
+}: {
+  design: Design;
+  /** Solo en productos de stock propio: unidades que quedan por variante. */
+  existencias?: Record<string, number>;
+}) {
   const { t } = useLocale();
   const { addItem } = useCart();
-  const [variantId, setVariantId] = useState(design.variants[0].id);
+  const quedan = (id: string) => (existencias ? (existencias[id] ?? 0) : Infinity);
+  const primera = design.variants.find((v) => quedan(v.id) > 0) ?? design.variants[0];
+  const [variantId, setVariantId] = useState(primera.id);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const variant = design.variants.find((v) => v.id === variantId)!;
+  const maximo = Math.min(9, quedan(variantId));
+  const agotado = maximo <= 0;
 
   function handleAdd() {
     addItem(design.slug, variantId, quantity);
@@ -44,22 +55,29 @@ export default function VariantPicker({ design }: { design: Design }) {
         </p>
 
         <label className="etiqueta-maquina mb-2 mt-8 block text-xs">
-          {design.category === "camiseta" ? t("product.colorTalla") : t("product.modelo")}
+          {design.category !== "funda-iphone" ? t("product.colorTalla") : t("product.modelo")}
         </label>
         <select
           className="selector"
           value={variantId}
           onChange={(e) => {
             setVariantId(e.target.value);
+            setQuantity(1);
             setAdded(false);
           }}
         >
           {design.variants.map((v) => (
-            <option key={v.id} value={v.id}>
+            <option key={v.id} value={v.id} disabled={quedan(v.id) <= 0}>
               {v.label}
+              {quedan(v.id) <= 0 ? ` — ${t("product.agotada")}` : ""}
             </option>
           ))}
         </select>
+        {existencias && !agotado && (
+          <p className="mt-2 font-[family-name:var(--font-display)] text-sm text-[var(--azul)]">
+            {t("product.quedan").replace("{n}", String(quedan(variantId)))}
+          </p>
+        )}
 
         <label className="etiqueta-maquina mb-2 mt-6 block text-xs">
           {t("product.cantidad")}
@@ -79,7 +97,7 @@ export default function VariantPicker({ design }: { design: Design }) {
           <button
             type="button"
             onClick={() => {
-              setQuantity((q) => Math.min(9, q + 1));
+              setQuantity((q) => Math.min(maximo, q + 1));
               setAdded(false);
             }}
             aria-label="+"
@@ -91,10 +109,12 @@ export default function VariantPicker({ design }: { design: Design }) {
         <button
           type="button"
           onClick={handleAdd}
-          className="boton-tira mt-9 w-full justify-center text-base"
+          disabled={agotado}
+          className="boton-tira mt-9 w-full justify-center text-base disabled:cursor-not-allowed disabled:opacity-40"
         >
-          {t("product.añadirCarrito")}
+          {agotado ? t("product.agotada") : t("product.añadirCarrito")}
         </button>
+        {design.stock && <p className="mt-5 border-t-2 border-dashed border-[var(--tinta)] pt-4 text-sm leading-relaxed">{t("product.notaStock")}</p>}
 
         {added && (
           <p className="mt-5 text-center font-[family-name:var(--font-display)] text-sm">

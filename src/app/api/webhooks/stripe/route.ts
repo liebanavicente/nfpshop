@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe";
 import { getDesign, getVariant } from "@/lib/products";
 import { createGelatoOrder, type GelatoOrderItem } from "@/lib/gelato";
 import { getSiteUrl } from "@/lib/site-url";
+import { confirmarStock, liberarStock } from "@/lib/stock";
 
 export async function POST(request: Request) {
   const body = await request.text();
@@ -33,6 +34,13 @@ export async function POST(request: Request) {
     await handleCompletedCheckout(session.id);
   }
 
+  // Pago de la edición limitada sin completar: las tallas reservadas vuelven al stock.
+  // (Hay que activar este evento en el webhook de Stripe.)
+  if (event.type === "checkout.session.expired") {
+    const session = event.data.object as Stripe.Checkout.Session;
+    if (session.metadata?.stock === "1") await liberarStock(session.id);
+  }
+
   return NextResponse.json({ received: true });
 }
 
@@ -40,6 +48,16 @@ async function handleCompletedCheckout(sessionId: string) {
   const session = await stripe.checkout.sessions.retrieve(sessionId, {
     expand: ["line_items.data.price.product"],
   });
+
+  const conStock = session.metadata?.stock === "1";
+  if (conStock) {
+    try {
+      await confirmarStock(session.id);
+    } catch (err) {
+      // El cobro ya está hecho: la reserva sigue descontada del stock, solo falta marcarla como venta.
+      console.error("Failed to confirm stock reservation", { sessionId, err });
+    }
+  }
 
   const shipping = session.collected_information?.shipping_details;
   const address = shipping?.address ?? session.customer_details?.address;
@@ -71,6 +89,9 @@ async function handleCompletedCheckout(sessionId: string) {
       continue;
     }
 
+    // Stock propio (edición limitada): no va a Gelato, lo envía la banda desde el aviso de Stripe.
+    if (!variant.gelatoProductUid) continue;
+
     items.push({
       itemReferenceId: `${design.slug}-${variant.id}`,
       productUid: variant.gelatoProductUid,
@@ -80,6 +101,7 @@ async function handleCompletedCheckout(sessionId: string) {
   }
 
   if (items.length === 0) {
+    if (conStock) return; // pedido solo de stock propio
     console.error("Checkout completed with no resolvable items", { sessionId });
     return;
   }

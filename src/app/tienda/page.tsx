@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { designs } from "@/lib/products";
+import { designs, type Category } from "@/lib/products";
 import ProductImage from "@/app/components/product-image";
 import { useLocale } from "@/lib/i18n";
 
@@ -22,10 +22,11 @@ function Section({
 }: {
   id: string;
   title: string;
-  category: "camiseta" | "funda-iphone";
+  category: Category;
 }) {
   const { t } = useLocale();
   const items = designs.filter((d) => d.category === category);
+  if (items.length === 0) return null;
   return (
     <section id={id} className="mb-24 scroll-mt-28">
       <h2 className="titular text-[clamp(2rem,5.5vw,3.75rem)]">
@@ -67,6 +68,7 @@ export default function Tienda() {
           <span className="tira">{t("tienda.heading")}</span>
         </h1>
         <p className="mb-16 mt-6 max-w-lg text-lg">{t("tienda.subheading")}</p>
+        <Section id="edicion-limitada" title={t("tienda.edicion")} category="edicion-limitada" />
         <Section id="camisetas" title={t("tienda.camisetas")} category="camiseta" />
         <Section id="fundas" title={t("tienda.fundas")} category="funda-iphone" />
       </div>

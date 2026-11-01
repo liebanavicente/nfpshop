@@ -23,7 +23,7 @@ export default function ProductImage({
   // match the garment color or dark-ink art disappears on a dark card and
   // light-ink art disappears on a light one.
   const swatchBg =
-    design.category === "camiseta"
+    design.category !== "funda-iphone"
       ? variant.id.startsWith("black")
         ? "bg-neutral-950"
         : "bg-neutral-100"
@@ -58,7 +58,7 @@ export default function ProductImage({
           flipped ? "opacity-100" : "opacity-0"
         }`}
       >
-        {design.category === "camiseta" ? (
+        {design.category !== "funda-iphone" ? (
           <TshirtMockup
             imageUrl={variant.imageUrl}
             color={variant.id.startsWith("black") ? "black" : "white"}
